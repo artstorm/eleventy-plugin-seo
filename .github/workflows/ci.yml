@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: npm install and test
+      run: |
+        npm i
+        npm test
