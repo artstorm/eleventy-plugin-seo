@@ -29,7 +29,11 @@ test("canonical url from page url", t => {
 
 test("canonical url from argument with an url", t => {
   // Mock liquidEngine
-  const liquidEngine = { evalValue() { return null; }};
+  const liquidEngine = {
+    evalValue() {
+      return null;
+    }
+  };
 
   const canonical = new Canonical(liquidEngine);
   const object = canonical.getObject();
@@ -43,7 +47,11 @@ test("canonical url from argument with an url", t => {
 
 test("canonical url from argument that liquidEngine resolves", t => {
   // Mock liquidEngine
-  const liquidEngine = { evalValue() { return '/foo'; }};
+  const liquidEngine = {
+    evalValue() {
+      return "/foo";
+    }
+  };
 
   const canonical = new Canonical(liquidEngine);
   const object = canonical.getObject();
@@ -54,4 +62,3 @@ test("canonical url from argument that liquidEngine resolves", t => {
     t.is(result, "https://test.com/foo");
   });
 });
-

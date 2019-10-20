@@ -4,6 +4,7 @@
   "description": "Eleventy Plugin to generate meta tags for improved SEO.",
   "main": ".eleventy.js",
   "scripts": {
+    "check": "npx prettier --check 'src/**/*.js' 'test/**/*.js' .eleventy.js",
     "test": "npx ava"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/artstorm/eleventy-plugin-seo#readme",
   "devDependencies": {
-    "ava": "^2.4.0"
+    "ava": "^2.4.0",
+    "prettier": "^1.18.2"
   }
 }
