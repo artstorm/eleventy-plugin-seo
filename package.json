@@ -7,6 +7,9 @@
     "check": "npx prettier --check 'src/**/*.js' 'test/**/*.js' .eleventy.js",
     "test": "npx nyc --reporter=lcov ava"
   },
+  "files" : [
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artstorm/eleventy-plugin-seo.git"
