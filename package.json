@@ -5,7 +5,7 @@
   "main": ".eleventy.js",
   "scripts": {
     "check": "npx prettier --check 'src/**/*.js' 'test/**/*.js' .eleventy.js",
-    "test": "npx nyc --reporter=lcov ava"
+    "test": "npx nyc --reporter=lcov --reporter=text ava"
   },
   "files" : [
     "src"
