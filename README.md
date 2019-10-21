@@ -9,6 +9,11 @@ An [Eleventy](https://github.com/11ty/eleventy) plugin to generate meta tags for
 
 _I wrote this plugin when moving from Jekyll to Eleventy to get the functionality I previously had with Jekyll SEO Tag._
 
+## Features
+
+* Page title.
+* Canonical URL.
+
 ## Installation
 
 Available on [npm](https://www.npmjs.com/package/eleventy-plugin-seo):
@@ -26,6 +31,16 @@ module.exports =  function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginSEO, require("./src/_data/seo.json"));
 };
 ```
+
+## Usage
+
+Add the following right before `</head>` in your site's template(s):
+
+```liquid
+{% seo %}
+```
+
+Done!
 
 ## Config
 
@@ -47,17 +62,7 @@ eleventyConfig.addPlugin(pluginSEO, require("./src/_data/seo.json"));
 
 #### url
 
-Full URL to the site, without trailing slash. Ie, `https://foo.com`.
-
-## Usage
-
-Add the following right before `</head>` in your site's template(s):
-
-```liquid
-{% seo %}
-```
-
-Done!
+Full URL to the site without trailing slash, `https://foo.com`.
 
 ## Additional Tags
 
