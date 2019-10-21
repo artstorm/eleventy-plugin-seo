@@ -23,9 +23,31 @@ Add the plugin to `.eleventy.js`:
 const pluginSEO = require("eleventy-plugin-seo");
 
 module.exports =  function(eleventyConfig) {
-  eleventyConfig.addPlugin(pluginSEO);
+  eleventyConfig.addPlugin(pluginSEO, require("./src/_data/seo.json"));
 };
 ```
+
+## Config
+
+Pass in an object with config options to the plugin:
+
+```js
+eleventyConfig.addPlugin(pluginSEO, {
+  url: "https://foo.com"
+});
+```  
+
+Alternatively keep the options in an external file and require it:
+
+```js
+eleventyConfig.addPlugin(pluginSEO, require("./src/_data/seo.json"));
+```
+
+### Options
+
+#### url
+
+Full URL to the site, without trailing slash. Ie, `https://foo.com`.
 
 ## Usage
 
