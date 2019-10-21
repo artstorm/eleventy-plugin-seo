@@ -3,6 +3,7 @@
 An [Eleventy](https://github.com/11ty/eleventy) plugin to generate meta tags for improved SEO using the Liquid templating engine.
 
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/CI/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
+[![codecov](https://codecov.io/gh/artstorm/eleventy-plugin-seo/branch/master/graph/badge.svg)](https://codecov.io/gh/artstorm/eleventy-plugin-seo)
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/style/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
