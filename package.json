@@ -1,7 +1,7 @@
 {
   "name": "eleventy-plugin-seo",
-  "version": "0.3.0",
-  "description": "Eleventy Plugin to generate meta tags for improved SEO.",
+  "version": "0.3.1",
+  "description": "Eleventy plugin to generate meta tags for improved SEO.",
   "main": ".eleventy.js",
   "scripts": {
     "check": "npx prettier --check 'src/**/*.js' 'test/**/*.js' .eleventy.js",
