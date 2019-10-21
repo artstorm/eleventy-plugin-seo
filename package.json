@@ -1,10 +1,11 @@
 {
   "name": "eleventy-plugin-seo",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Eleventy Plugin to generate meta tags for improved SEO.",
   "main": ".eleventy.js",
   "scripts": {
-    "test": "npx ava"
+    "check": "npx prettier --check 'src/**/*.js' 'test/**/*.js' .eleventy.js",
+    "test": "npx nyc --reporter=lcov ava"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,8 @@
   },
   "homepage": "https://github.com/artstorm/eleventy-plugin-seo#readme",
   "devDependencies": {
-    "ava": "^2.4.0"
+    "ava": "^2.4.0",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2"
   }
 }

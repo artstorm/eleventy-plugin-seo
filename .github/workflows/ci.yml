@@ -15,3 +15,9 @@ jobs:
       run: |
         npm i
         npm test
+    - name: Upload to CodeCov
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage/lcov.info
+        

@@ -1,8 +1,6 @@
-class Canonical {
-  constructor(liquidEngine) {
-    this.liquidEngine = liquidEngine;
-  }
+const BaseTag = require("./BaseTag");
 
+class Canonical extends BaseTag {
   getObject() {
     return {
       parse: (tagToken, remainToken) => {
@@ -10,9 +8,6 @@ class Canonical {
         this.url = tagToken.args;
       },
       render: (scope, hash) => {
-        // Get reference to site data collection.
-        const site = scope.contexts[0].site;
-
         // Resolve possible URL passed as argument.
         var url = null;
         if (this.url !== "") {
@@ -22,7 +17,7 @@ class Canonical {
         // Use page data for URL if none was passed with argument.
         url = url || scope.contexts[0].page.url;
 
-        return Promise.resolve(site.url + url);
+        return Promise.resolve(this.baseURL + url);
       }
     };
   }
