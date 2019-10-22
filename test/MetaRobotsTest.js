@@ -36,7 +36,7 @@ test("Missing pagination gets index and follow", t => {
   const metaRobots = new MetaRobots();
   const object = metaRobots.getObject();
 
-  return object.render({contexts:[{}]}).then(result => {
+  return object.render({ contexts: [{}] }).then(result => {
     t.is(result, "index,follow");
   });
 });
