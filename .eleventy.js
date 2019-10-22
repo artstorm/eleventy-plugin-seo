@@ -1,6 +1,7 @@
 const Config = require("./src/Config");
 const SEO = require("./src/SEO");
 const Canonical = require("./src/Canonical");
+const MetaRobots = require("./src/MetaRobots");
 
 module.exports = {
   configFunction: (eleventyConfig, options = {}) => {
@@ -14,6 +15,11 @@ module.exports = {
     eleventyConfig.addLiquidTag("canonicalURL", liquidEngine => {
       const canonical = new Canonical(liquidEngine, config);
       return canonical.getObject();
+    });
+
+    eleventyConfig.addLiquidTag("metaRobots", liquidEngine => {
+      const metaRobots = new MetaRobots(liquidEngine, config);
+      return metaRobots.getObject();
     });
   }
 };

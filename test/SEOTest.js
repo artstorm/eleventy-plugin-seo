@@ -31,6 +31,8 @@ test("SEO renders template", t => {
   const seo = new SEO(liquidEngine, config);
   const object = seo.getObject();
 
+  object.parse();
+
   return object.render(t.context.scope).then(result => {
     t.truthy(
       result.includes(`<link rel="canonical" href="{% canonicalURL %}">`)
