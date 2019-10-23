@@ -8,6 +8,14 @@ class BaseTag {
     return this._config.get();
   }
 
+  get title() {
+    return this.config.title;
+  }
+
+  get description() {
+    return this.config.description;
+  }
+
   get baseURL() {
     return this.config.url;
   }
