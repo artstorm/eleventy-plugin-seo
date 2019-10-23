@@ -11,6 +11,10 @@ class BaseTag {
   get baseURL() {
     return this.config.url;
   }
+
+  get title() {
+    return this.config.title;
+  }
 }
 
 module.exports = BaseTag;

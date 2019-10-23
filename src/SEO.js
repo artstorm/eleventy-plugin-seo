@@ -6,6 +6,8 @@ class SEO extends BaseTag {
       parse: (tagToken, remainToken) => {},
       render: async (scope, hash) => {
         const template = `
+<title>{% pageTitle %}</title>
+
 <meta name="robots" content="{% metaRobots %}">
 
 <link rel="canonical" href="{% canonicalURL %}">

@@ -29,5 +29,8 @@
     "ava": "^2.4.0",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "html-entities": "^1.2.1"
   }
 }
