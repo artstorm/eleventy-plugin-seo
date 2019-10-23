@@ -11,6 +11,8 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 
 ## Features
 
+* Page title.
+* Page description.
 * Canonical URL.
 * Robots meta directive for pagination.
 
@@ -42,12 +44,28 @@ Add the following right before `</head>` in your site's template(s):
 
 Done!
 
+### Front Matter
+
+The plugin looks for these front matters:
+
+```yml
+---
+title:   "Some page title"
+excerpt: "Some page excerpt"
+---
+```
+
+* title: If no title is set for a page it falls back on using the title in config.
+* excerpt: If no excerpt is set for a page it falls back on using the description in the config. 
+
 ## Config
 
 Pass in an object with config options to the plugin:
 
 ```js
 eleventyConfig.addPlugin(pluginSEO, {
+  title: "Foobar Site",
+  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   url: "https://foo.com"
 });
 ```  
@@ -69,6 +87,22 @@ Full URL to the site without trailing slash, `https://foo.com`.
 While adding the `{% seo %}` tag is all that is needed, the plugin defines more liquid tags that it uses internally that can be convenient to use in other places.
 
 The following liquid tags are supplied by the plugin.
+
+### `pageTitle`
+
+Generates the title for a page. Uses the title in front matter if available else it falls back on the title in the plugin config.
+
+```liquid
+{% pageTitle %}
+```
+
+### `pageDescription`
+
+Generates the description for a page. Uses the excerpt in front matter if available else it falls back on the description in the plugin config.
+
+```liquid
+{% pageDescription %}
+```
 
 ### `canonicalURL [url]`
 
