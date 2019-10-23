@@ -8,6 +8,7 @@ class SEO extends BaseTag {
         const template = `
 <title>{% pageTitle %}</title>
 
+<meta name="description" content="{% pageDescription %}">
 <meta name="robots" content="{% metaRobots %}">
 
 <link rel="canonical" href="{% canonicalURL %}">

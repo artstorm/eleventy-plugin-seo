@@ -1,6 +1,7 @@
 const Config = require("./src/Config");
 const SEO = require("./src/SEO");
 const Title = require("./src/Title");
+const Description = require("./src/Description");
 const Canonical = require("./src/Canonical");
 const MetaRobots = require("./src/MetaRobots");
 
@@ -16,6 +17,11 @@ module.exports = {
     eleventyConfig.addLiquidTag("pageTitle", liquidEngine => {
       const title = new Title(liquidEngine, config);
       return title.getObject();
+    });
+
+    eleventyConfig.addLiquidTag("pageDescription", liquidEngine => {
+      const description = new Description(liquidEngine, config);
+      return description.getObject();
     });
 
     eleventyConfig.addLiquidTag("canonicalURL", liquidEngine => {
