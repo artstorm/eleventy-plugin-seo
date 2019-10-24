@@ -15,9 +15,32 @@ jobs:
       run: |
         npm i
         npm test
-    - name: Upload to CodeCov
-      uses: codecov/codecov-action@v1.0.3
+    - name: Upload code coverage result
+      uses: actions/upload-artifact@v1
       with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        file: ./coverage/lcov.info
-        
+        name: coverage
+        path: ./coverage/lcov.info
+
+  report:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Download code coverage result
+        uses: actions/download-artifact@v1
+        with:
+          name: coverage
+      - name: Upload to CodeCov
+        uses: codecov/codecov-action@v1.0.3
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./coverage/lcov.info
+      - name: Upload to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+      
