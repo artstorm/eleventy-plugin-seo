@@ -1,7 +1,11 @@
+const htmlEntities = require("html-entities").Html5Entities;
+
 class BaseTag {
   constructor(liquidEngine, config) {
     this.liquidEngine = liquidEngine;
     this._config = config;
+
+    this.entities = new htmlEntities();
   }
 
   get config() {

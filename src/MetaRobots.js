@@ -7,10 +7,8 @@ class MetaRobots extends BaseTag {
         const pagination = scope.contexts[0].pagination;
         let robots = "index,follow";
 
-        if (pagination) {
-          if (pagination.pageNumber > 0) {
-            robots = `no${robots}`;
-          }
+        if (pagination && pagination.pageNumber > 0) {
+          robots = `no${robots}`;
         }
 
         return Promise.resolve(robots);

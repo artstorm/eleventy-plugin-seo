@@ -11,7 +11,7 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 
 ## Features
 
-* Page title.
+* Page title with pagination.
 * Page description.
 * Canonical URL.
 * Robots meta directive for pagination.
@@ -55,7 +55,7 @@ excerpt: "Some page excerpt"
 ---
 ```
 
-* title: If no title is set for a page it falls back on using the title in config.
+* title: If no title is set for a page it falls back on using the title in config. Page with page number gets added to the title when paginated.
 * excerpt: If no excerpt is set for a page it falls back on using the description in the config. 
 
 ## Config
@@ -90,7 +90,7 @@ The following liquid tags are supplied by the plugin.
 
 ### `pageTitle`
 
-Generates the title for a page. Uses the title in front matter if available else it falls back on the title in the plugin config.
+Generates the title for a page. Uses the title in front matter if available else it falls back on the title in the plugin config. Page with page number gets added to the title when paginated.
 
 ```liquid
 {% pageTitle %}

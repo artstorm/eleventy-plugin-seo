@@ -31,3 +31,34 @@ test("Pages without front matter title should use config title", t => {
     t.is(result, "Config title");
   });
 });
+
+test("Title should be escaped", t => {
+  const config = new Config({ title: "Let's escape" });
+  const title = new Title(null, config);
+  const object = title.getObject();
+  t.context.scope.contexts[0] = {};
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result, "Let&apos;s escape");
+  });
+});
+
+test("Page and pagenumber should be added on paginated pages", t => {
+  const title = new Title();
+  const object = title.getObject();
+  t.context.scope.contexts[0].pagination = { pageNumber: 1 };
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result, "Title in front matter Page 2");
+  });
+});
+
+test("Page and pagenumber should not be added on paginated pages with pageNumber 0", t => {
+  const title = new Title();
+  const object = title.getObject();
+  t.context.scope.contexts[0].pagination = { pageNumber: 0 };
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result, "Title in front matter");
+  });
+});
