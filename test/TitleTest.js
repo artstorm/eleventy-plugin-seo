@@ -3,6 +3,8 @@ import Config from "../src/Config";
 import Title from "../src/Title";
 
 test.beforeEach(t => {
+  t.context.config = new Config({ title: "Site title" });
+
   t.context.scope = {
     contexts: [
       {
@@ -13,11 +15,11 @@ test.beforeEach(t => {
 });
 
 test("Front matter title should be used", t => {
-  const title = new Title();
+  const title = new Title(null, t.context.config);
   const object = title.getObject();
 
   return object.render(t.context.scope).then(result => {
-    t.is(result, "Title in front matter");
+    t.is(result, "Title in front matter | Site title");
   });
 });
 
@@ -44,21 +46,21 @@ test("Title should be escaped", t => {
 });
 
 test("Page and pagenumber should be added on paginated pages", t => {
-  const title = new Title();
+  const title = new Title(null, t.context.config);
   const object = title.getObject();
   t.context.scope.contexts[0].pagination = { pageNumber: 1 };
 
   return object.render(t.context.scope).then(result => {
-    t.is(result, "Title in front matter Page 2");
+    t.is(result, "Title in front matter Page 2 | Site title");
   });
 });
 
 test("Page and pagenumber should not be added on paginated pages with pageNumber 0", t => {
-  const title = new Title();
+  const title = new Title(null, t.context.config);
   const object = title.getObject();
   t.context.scope.contexts[0].pagination = { pageNumber: 0 };
 
   return object.render(t.context.scope).then(result => {
-    t.is(result, "Title in front matter");
+    t.is(result, "Title in front matter | Site title");
   });
 });

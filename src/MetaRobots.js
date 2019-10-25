@@ -4,10 +4,14 @@ class MetaRobots extends BaseTag {
   getObject() {
     return {
       render: (scope, hash) => {
-        const pagination = scope.contexts[0].pagination;
         let robots = "index,follow";
 
-        if (pagination && pagination.pageNumber > 0) {
+        const pageNumber = this.keyPathVal(
+          scope.contexts[0],
+          "pagination.pageNumber",
+          0
+        );
+        if (pageNumber > 0) {
           robots = `no${robots}`;
         }
 

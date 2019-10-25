@@ -1,15 +1,15 @@
 class Config {
-  constructor(options = {}) {
+  constructor(config = {}) {
     const defaults = {
       url: ""
     };
-    options = { ...defaults, ...options };
+    config = { ...defaults, ...config };
 
-    this.options = options;
+    this.config = config;
   }
 
   get() {
-    return this.options;
+    return this.config;
   }
 }
 
