@@ -11,7 +11,7 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 
 ## Features
 
-* Page title.
+* Page title with styling options and pagination.
 * Page description.
 * Canonical URL.
 * Robots meta directive for pagination.
@@ -55,9 +55,6 @@ excerpt: "Some page excerpt"
 ---
 ```
 
-* title: If no title is set for a page it falls back on using the title in config.
-* excerpt: If no excerpt is set for a page it falls back on using the description in the config. 
-
 ## Config
 
 Pass in an object with config options to the plugin:
@@ -76,11 +73,42 @@ Alternatively keep the options in an external file and require it:
 eleventyConfig.addPlugin(pluginSEO, require("./src/_data/seo.json"));
 ```
 
-### Options
+### title
 
-#### url
+Uses the title in front matter and by default the site title gets appended to the page title, `page title - site title`. Page with page number gets appended to the page title when paginated. 
+
+See options for customization.
+
+### description
+
+Uses front matter excerpt to generate the description. If no excerpt is set for a page it falls back on using the site description in the config. 
+
+### url
 
 Full URL to the site without trailing slash, `https://foo.com`.
+
+### Options
+
+The behavior of the output can be controlled via an options object that can be passed in with the config.
+
+```js
+eleventyConfig.addPlugin(pluginSEO, {
+  title: "Foobar Site",
+  ...
+  options: {
+    titleStyle: "minimalistic",
+    titleDivider: "|"
+  }
+});
+```  
+
+#### titleStyle
+
+Setting the style to `minimalistic` removes the appending of the site title to all title strings.
+
+#### titleDivider
+
+Changes the divider between elements in the title output from `-` to any custom character or string.
 
 ## Additional Tags
 
@@ -90,7 +118,7 @@ The following liquid tags are supplied by the plugin.
 
 ### `pageTitle`
 
-Generates the title for a page. Uses the title in front matter if available else it falls back on the title in the plugin config.
+Generates the title for a page. 
 
 ```liquid
 {% pageTitle %}
@@ -98,7 +126,7 @@ Generates the title for a page. Uses the title in front matter if available else
 
 ### `pageDescription`
 
-Generates the description for a page. Uses the excerpt in front matter if available else it falls back on the description in the plugin config.
+Generates the description for a page.
 
 ```liquid
 {% pageDescription %}

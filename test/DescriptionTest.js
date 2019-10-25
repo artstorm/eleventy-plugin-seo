@@ -31,3 +31,14 @@ test("Pages without front matter excerpt should use config description", t => {
     t.is(result, "Config description");
   });
 });
+
+test("Descripiton should be escaped", t => {
+  const config = new Config({ description: "Let's escape" });
+  const description = new Description(null, config);
+  const object = description.getObject();
+  t.context.scope.contexts[0] = {};
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result, "Let&apos;s escape");
+  });
+});
