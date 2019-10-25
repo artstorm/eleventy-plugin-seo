@@ -19,7 +19,7 @@ test("Front matter title should be used", t => {
   const object = title.getObject();
 
   return object.render(t.context.scope).then(result => {
-    t.is(result, "Title in front matter | Site title");
+    t.is(result, "Title in front matter - Site title");
   });
 });
 
@@ -51,7 +51,7 @@ test("Page and pagenumber should be added on paginated pages", t => {
   t.context.scope.contexts[0].pagination = { pageNumber: 1 };
 
   return object.render(t.context.scope).then(result => {
-    t.is(result, "Title in front matter Page 2 | Site title");
+    t.is(result, "Title in front matter - Page 2 - Site title");
   });
 });
 
@@ -61,6 +61,32 @@ test("Page and pagenumber should not be added on paginated pages with pageNumber
   t.context.scope.contexts[0].pagination = { pageNumber: 0 };
 
   return object.render(t.context.scope).then(result => {
+    t.is(result, "Title in front matter - Site title");
+  });
+});
+
+test("Should be able to set custom divider", t => {
+  const config = new Config({
+    title: "Site title",
+    options: { titleDivider: "|" }
+  });
+  const title = new Title(null, config);
+  const object = title.getObject();
+
+  return object.render(t.context.scope).then(result => {
     t.is(result, "Title in front matter | Site title");
+  });
+});
+
+test("Minimalistic style should not append site title", t => {
+  const config = new Config({
+    title: "Site title",
+    options: { titleStyle: "minimalistic" }
+  });
+  const title = new Title(null, config);
+  const object = title.getObject();
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result, "Title in front matter");
   });
 });

@@ -30,7 +30,9 @@ class BaseTag {
 
   keyPathVal(obj, path, defaultValue) {
     try {
-      return path.split(".").reduce((res, prop) => res[prop], obj);
+      return (
+        path.split(".").reduce((res, prop) => res[prop], obj) || defaultValue
+      );
     } catch (error) {
       return defaultValue;
     }
