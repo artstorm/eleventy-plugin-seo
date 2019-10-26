@@ -24,8 +24,27 @@ class BaseTag {
     return this.config.description;
   }
 
+  get siteAuthor() {
+    return this.config.author;
+  }
+
   get baseURL() {
     return this.config.url;
+  }
+
+  getObject() {
+    return {
+      parse: (tagToken, remainToken) => this.parse(tagToken, remainToken),
+      render: (scope, hash) => this.render(scope, hash)
+    };
+  }
+
+  parse(tagToken, remainToken) {
+    // To be implemented by subclass to handle liquid tag parsing.
+  }
+
+  render(scope, hash) {
+    // To be implemented by subclass to handle liquid tag rendering.
   }
 
   keyPathVal(obj, path, defaultValue) {
