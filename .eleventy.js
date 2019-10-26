@@ -4,6 +4,7 @@ const Title = require("./src/Title");
 const Description = require("./src/Description");
 const Canonical = require("./src/Canonical");
 const MetaRobots = require("./src/MetaRobots");
+const MetaAuthor = require("./src/MetaAuthor");
 
 module.exports = {
   configFunction: (eleventyConfig, options = {}) => {
@@ -27,6 +28,11 @@ module.exports = {
     eleventyConfig.addLiquidTag("canonicalURL", liquidEngine => {
       const canonical = new Canonical(liquidEngine, config);
       return canonical.getObject();
+    });
+
+    eleventyConfig.addLiquidTag("metaAuthor", liquidEngine => {
+      const metaAuthor = new MetaAuthor(liquidEngine, config);
+      return metaAuthor.getObject();
     });
 
     eleventyConfig.addLiquidTag("metaRobots", liquidEngine => {

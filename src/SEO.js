@@ -10,6 +10,7 @@ class SEO extends BaseTag {
 
 <meta name="description" content="{% pageDescription %}">
 <meta name="robots" content="{% metaRobots %}">
+<meta name="author" content="{% metaAuthor %}">
 
 <link rel="canonical" href="{% canonicalURL %}">
         `;

@@ -1,12 +1,6 @@
 const BaseTag = require("./BaseTag");
 
 class Title extends BaseTag {
-  getObject() {
-    return {
-      render: (scope, hash) => this.render(scope, hash)
-    };
-  }
-
   render(scope, hash) {
     // Get title from front matter.
     const title = scope.contexts[0].title;

@@ -4,6 +4,7 @@ An [Eleventy](https://github.com/11ty/eleventy) plugin to generate meta tags for
 
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/CI/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
 [![codecov](https://codecov.io/gh/artstorm/eleventy-plugin-seo/branch/master/graph/badge.svg)](https://codecov.io/gh/artstorm/eleventy-plugin-seo)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ed1dcde669edcc8240a/maintainability)](https://codeclimate.com/github/artstorm/eleventy-plugin-seo/maintainability)
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/style/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
@@ -15,6 +16,7 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 * Page description.
 * Canonical URL.
 * Robots meta directive for pagination.
+* Author meta directive.
 
 ## Installation
 
@@ -46,12 +48,13 @@ Done!
 
 ### Front Matter
 
-The plugin looks for these front matters:
+The plugin uses these front matters when available:
 
 ```yml
 ---
-title:   "Some page title"
-excerpt: "Some page excerpt"
+title:   Some page title
+excerpt: Some page excerpt
+author:  Jane Doe
 ---
 ```
 
@@ -63,7 +66,8 @@ Pass in an object with config options to the plugin:
 eleventyConfig.addPlugin(pluginSEO, {
   title: "Foobar Site",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  url: "https://foo.com"
+  url: "https://foo.com",
+  author: "Jane Doe"
 });
 ```  
 
@@ -86,6 +90,10 @@ Uses front matter excerpt to generate the description. If no excerpt is set for 
 ### url
 
 Full URL to the site without trailing slash, `https://foo.com`.
+
+### author
+
+Full name of the site author, `Jane Doe`. Can be overridden on a per page basis using `author` in front matter.
 
 ### Options
 
@@ -173,6 +181,14 @@ Use with Eleventy provided variables, like `page.url` that resolves to an url in
   <loc>{% canonicalURL item.url %}</loc>
   ...
 {% endfor %}
+```
+
+### `metaAuthor`
+
+Outputs the full name of the author for the current page.
+
+```liquid
+{% metaAuthor %}
 ```
 
 ### `metaRobots`
