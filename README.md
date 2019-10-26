@@ -4,6 +4,7 @@ An [Eleventy](https://github.com/11ty/eleventy) plugin to generate meta tags for
 
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/CI/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
 [![codecov](https://codecov.io/gh/artstorm/eleventy-plugin-seo/branch/master/graph/badge.svg)](https://codecov.io/gh/artstorm/eleventy-plugin-seo)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1ed1dcde669edcc8240a/maintainability)](https://codeclimate.com/github/artstorm/eleventy-plugin-seo/maintainability)
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/style/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
