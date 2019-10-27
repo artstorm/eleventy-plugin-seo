@@ -62,13 +62,13 @@ test("front matter image overrides config image", t => {
   });
 });
 
-test("page without ogtype in front matter should use website", t => {
+test("page without ogtype in front matter should use article", t => {
   const config = new Config({});
   const openGraph = new OpenGraph(t.context.liquidEngineMock, config);
   const object = openGraph.getObject();
 
   return object.render(t.context.scope).then(result => {
-    t.is(result.contexts.ogtype, "website");
+    t.is(result.contexts.ogtype, "article");
   });
 });
 
@@ -76,9 +76,9 @@ test("page with ogtype in front matter should use it", t => {
   const config = new Config({});
   const openGraph = new OpenGraph(t.context.liquidEngineMock, config);
   const object = openGraph.getObject();
-  t.context.scope.contexts[0].ogtype = "article";
+  t.context.scope.contexts[0].ogtype = "website";
 
   return object.render(t.context.scope).then(result => {
-    t.is(result.contexts.ogtype, "article");
+    t.is(result.contexts.ogtype, "website");
   });
 });

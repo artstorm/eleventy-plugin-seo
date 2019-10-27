@@ -57,9 +57,11 @@ title:   Some page title
 excerpt: Some page excerpt
 author:  Jane Doe
 image:   foo.jpg
-ogtype:  article
+ogtype:  website
 ---
 ```
+
+`ogtype` defaults to `article`, set it to `website` or something more appropriate via front matter where required.
 
 ## Config
 
@@ -125,17 +127,6 @@ Setting the style to `minimalistic` removes the appending of the site title to a
 #### titleDivider
 
 Changes the divider between elements in the title output from `-` to any custom character or string.
-
-## Tips
-
-### Use Directory Data Files
-
-By default `og:type` is set to `website`. Instead of manually setting all blog posts' front matter `ogtype` to `article` use a directory datafile, `posts/posts.json`:
-```
-{
-  "ogtype": "article"
-}
-```
 
 ## Additional Tags
 

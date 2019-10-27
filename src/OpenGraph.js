@@ -13,9 +13,9 @@ class OpenGraph extends BaseTag {
       scope.contexts[0].image = siteImage;
     }
 
-    // Default `og:type` to website if none is set
+    // Default `og:type` to article if none is set
     if (!scope.contexts[0].ogtype) {
-      scope.contexts[0].ogtype = "website";
+      scope.contexts[0].ogtype = "article";
     }
 
     const source = fs.readFileSync(
