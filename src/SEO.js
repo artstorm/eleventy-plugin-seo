@@ -13,6 +13,8 @@ class SEO extends BaseTag {
 <meta name="author" content="{% metaAuthor %}">
 
 <link rel="canonical" href="{% canonicalURL %}">
+
+{% openGraph %}
         `;
 
         const parsed = this.liquidEngine.parse(template);

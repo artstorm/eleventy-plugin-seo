@@ -5,6 +5,7 @@ const Description = require("./src/Description");
 const Canonical = require("./src/Canonical");
 const MetaRobots = require("./src/MetaRobots");
 const MetaAuthor = require("./src/MetaAuthor");
+const OpenGraph = require("./src/OpenGraph");
 
 module.exports = {
   configFunction: (eleventyConfig, options = {}) => {
@@ -38,6 +39,11 @@ module.exports = {
     eleventyConfig.addLiquidTag("metaRobots", liquidEngine => {
       const metaRobots = new MetaRobots(liquidEngine, config);
       return metaRobots.getObject();
+    });
+
+    eleventyConfig.addLiquidTag("openGraph", liquidEngine => {
+      const openGraph = new OpenGraph(liquidEngine, config);
+      return openGraph.getObject();
     });
   }
 };
