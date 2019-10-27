@@ -43,11 +43,6 @@ jobs:
           ./cc-test-reporter upload-coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TEST_REPORTER_ID }}
-      - name: Upload to CodeCov
-        uses: codecov/codecov-action@v1.0.3
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage/lcov.info
       - name: Upload to Coveralls
         uses: coverallsapp/github-action@master
         with:
