@@ -17,6 +17,7 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 * Canonical URL.
 * Robots meta directive for pagination.
 * Author meta directive.
+* Open Graph markup.
 
 ## Installation
 
@@ -55,6 +56,8 @@ The plugin uses these front matters when available:
 title:   Some page title
 excerpt: Some page excerpt
 author:  Jane Doe
+image:   foo.jpg
+ogtype:  article
 ---
 ```
 
@@ -67,7 +70,8 @@ eleventyConfig.addPlugin(pluginSEO, {
   title: "Foobar Site",
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   url: "https://foo.com",
-  author: "Jane Doe"
+  author: "Jane Doe",
+  image: "foo.jpg"
 });
 ```  
 
@@ -95,6 +99,10 @@ Full URL to the site without trailing slash, `https://foo.com`.
 
 Full name of the site author, `Jane Doe`. Can be overridden on a per page basis using `author` in front matter.
 
+### image
+
+URL to default image to use if none is set in front matter when creating markup blocks for open graph and Twitter cards.
+
 ### Options
 
 The behavior of the output can be controlled via an options object that can be passed in with the config.
@@ -117,6 +125,17 @@ Setting the style to `minimalistic` removes the appending of the site title to a
 #### titleDivider
 
 Changes the divider between elements in the title output from `-` to any custom character or string.
+
+## Tips
+
+### Use Directory Data Files
+
+By default `og:type` is set to `website`. Instead of manually setting all blog posts' front matter `ogtype` to `article` use a directory datafile, `posts/posts.json`:
+```
+{
+  "ogtype": "article"
+}
+```
 
 ## Additional Tags
 

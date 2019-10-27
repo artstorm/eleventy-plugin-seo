@@ -76,3 +76,11 @@ Adds robots meta directive with `index,follow` except on paginated pages which g
 ```liquid
 {% metaRobots %}
 ```
+
+## `openGraph`
+
+Generates block of open graph markup for current page.
+
+```liquid
+{% openGraph %}
+```
