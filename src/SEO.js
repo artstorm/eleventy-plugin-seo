@@ -15,6 +15,8 @@ class SEO extends BaseTag {
 <link rel="canonical" href="{% canonicalURL %}">
 
 {% openGraph %}
+
+{% twitterCard %}
         `;
 
         const parsed = this.liquidEngine.parse(template);

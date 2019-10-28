@@ -32,6 +32,15 @@ class BaseTag {
     return this.config.url;
   }
 
+  image(scope) {
+    // Fallback on using image in config if available and none is set in front matter.
+    if (!scope.contexts[0].image && this.config.image) {
+      scope.contexts[0].image = this.config.image;
+    }
+
+    return scope;
+  }
+
   getObject() {
     return {
       parse: (tagToken, remainToken) => this.parse(tagToken, remainToken),

@@ -2,21 +2,21 @@ const fs = require("fs");
 const BaseTag = require("./BaseTag");
 
 /**
- * @see https://developers.facebook.com/docs/sharing/webmasters/
- * @see https://ogp.me
+ * @see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/abouts-cards
+ * @see https://cards-dev.twitter.com/validator
  */
-class OpenGraph extends BaseTag {
+class TwitterCard extends BaseTag {
   async render(scope, hash) {
     // Set image.
     scope = this.image(scope);
 
-    // Default `og:type` to article if none is set
-    if (!scope.contexts[0].ogtype) {
-      scope.contexts[0].ogtype = "article";
+    // Get twitter username for site from config.
+    if (this.config.twitter) {
+      scope.contexts[0].siteTwitter = this.config.twitter;
     }
 
     const source = fs.readFileSync(
-      `${__dirname}/template/opengraph.liquid`,
+      `${__dirname}/template/twittercard.liquid`,
       "utf-8"
     );
     const template = this.liquidEngine.parse(source);
@@ -29,4 +29,4 @@ class OpenGraph extends BaseTag {
   }
 }
 
-module.exports = OpenGraph;
+module.exports = TwitterCard;
