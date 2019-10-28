@@ -18,6 +18,7 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 * Robots meta directive for pagination.
 * Author meta directive.
 * Open Graph markup.
+* Twitter Card markup.
 
 ## Installation
 
@@ -73,6 +74,7 @@ eleventyConfig.addPlugin(pluginSEO, {
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   url: "https://foo.com",
   author: "Jane Doe",
+  author: "username",
   image: "foo.jpg"
 });
 ```  
@@ -100,6 +102,10 @@ Full URL to the site without trailing slash, `https://foo.com`.
 ### author
 
 Full name of the site author, `Jane Doe`. Can be overridden on a per page basis using `author` in front matter.
+
+### twitter
+
+Twitter username for the author of the site. Used when generating the markup for Twitter cards.
 
 ### image
 

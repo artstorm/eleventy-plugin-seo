@@ -6,6 +6,7 @@ const Canonical = require("./src/Canonical");
 const MetaRobots = require("./src/MetaRobots");
 const MetaAuthor = require("./src/MetaAuthor");
 const OpenGraph = require("./src/OpenGraph");
+const TwitterCard = require("./src/TwitterCard");
 
 module.exports = {
   configFunction: (eleventyConfig, options = {}) => {
@@ -44,6 +45,11 @@ module.exports = {
     eleventyConfig.addLiquidTag("openGraph", liquidEngine => {
       const openGraph = new OpenGraph(liquidEngine, config);
       return openGraph.getObject();
+    });
+
+    eleventyConfig.addLiquidTag("twitterCard", liquidEngine => {
+      const twitterCard = new TwitterCard(liquidEngine, config);
+      return twitterCard.getObject();
     });
   }
 };
