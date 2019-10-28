@@ -79,8 +79,16 @@ Adds robots meta directive with `index,follow` except on paginated pages which g
 
 ## `openGraph`
 
-Generates block of open graph markup for current page.
+Generates block of Open Graph markup for current page.
 
 ```liquid
 {% openGraph %}
+```
+
+## `twitterCard`
+
+Generates block of twitter card markup for current page.
+
+```liquid
+{% twitterCard %}
 ```
