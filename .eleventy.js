@@ -1,4 +1,5 @@
 const Config = require("./src/Config");
+const Nunjucks = require("./src/Engines/Nunjucks");
 const SEO = require("./src/SEO");
 const Title = require("./src/Title");
 const Description = require("./src/Description");
@@ -11,6 +12,8 @@ const TwitterCard = require("./src/TwitterCard");
 module.exports = {
   configFunction: (eleventyConfig, options = {}) => {
     const config = new Config(options);
+
+    const nunjucks = new Nunjucks(eleventyConfig);
 
     eleventyConfig.addLiquidTag("seo", liquidEngine => {
       const seo = new SEO(liquidEngine, config);
