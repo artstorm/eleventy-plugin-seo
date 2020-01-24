@@ -3,6 +3,8 @@ class BaseEngine {
     this.eleventyConfig = eleventyConfig;
 
     this.seo(eleventyConfig);
+    this.pageTitle(eleventyConfig);
+    this.pageDescription(eleventyConfig);
   }
 }
 
