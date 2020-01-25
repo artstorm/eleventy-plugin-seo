@@ -1,13 +1,8 @@
-const fs = require("fs");
 const BaseTag = require("./BaseTag");
 
 class SEO extends BaseTag {
   async liquidRender(scope, hash) {
-    const template = fs.readFileSync(
-      `${__dirname}/../templates/seo.liquid`,
-      "utf-8"
-    );
-
+    const template = this.loadTemplate("seo.liquid");
     const parsed = this.engine.parse(template);
     const rendered = await this.engine.render(parsed, scope.contexts[0]);
 
@@ -15,11 +10,7 @@ class SEO extends BaseTag {
   }
 
   nunjucksRender(self, context) {
-    const template = fs.readFileSync(
-      `${__dirname}/../templates/seo.njk`,
-      "utf-8"
-    );
-
+    const template = self.loadTemplate("seo.njk");
     return context.env.renderString(template, context.ctx);
   }
 }

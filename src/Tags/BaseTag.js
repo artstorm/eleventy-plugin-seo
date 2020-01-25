@@ -1,3 +1,4 @@
+const fs = require("fs");
 const htmlEntities = require("html-entities").Html5Entities;
 
 class BaseTag {
@@ -85,6 +86,10 @@ class BaseTag {
 
   nunjucksRender(self, context) {
     // To be implemented by subclass to handle nunjucks tag rendering.
+  }
+
+  loadTemplate(template) {
+    return fs.readFileSync(`${__dirname}/../templates/${template}`, "utf-8");
   }
 
   keyPathVal(obj, path, defaultValue) {

@@ -1,9 +1,9 @@
 import test from "ava";
-import BaseTag from "../src/BaseTag";
+import BaseTag from "../../src/Tags/BaseTag";
 
 test("Should have an object that can call render and parse", t => {
   const tag = new BaseTag();
-  const object = tag.getObject();
+  const object = tag.getLiquidTag();
   object.parse();
   object.render();
 
