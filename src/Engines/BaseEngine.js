@@ -1,5 +1,6 @@
 class BaseEngine {
-  constructor(eleventyConfig) {
+  constructor(config, eleventyConfig) {
+    this.config = config;
     this.eleventyConfig = eleventyConfig;
 
     this.seo(eleventyConfig);

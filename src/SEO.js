@@ -4,7 +4,7 @@ const BaseTag = require("./BaseTag");
 class SEO extends BaseTag {
   async render(scope, hash) {
     const template = fs.readFileSync(
-      `${__dirname}/template/seo.liquid`,
+      `${__dirname}/templates/seo.liquid`,
       "utf-8"
     );
 

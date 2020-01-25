@@ -1,28 +1,15 @@
-const htmlEntities = require("html-entities").Html5Entities;
+const BaseTag = require("./BaseTag");
 
-class PageTitle {
-  constructor(title) {
-    this.title = title;
-
-    this.entities = new htmlEntities();
-  }
-
-  result() {
+class PageTitle extends BaseTag {
+  render(title, pageNumber) {
     // Get options.
     const style = this.keyPathVal(this, "options.titleStyle", "default");
     const divider = this.keyPathVal(this, "options.titleDivider", "-");
 
     // Fallback on `title` in config if no title is set for the page.
-    // let pageTitle = title || this.siteTitle;
-    let pageTitle = this.title || this.siteTitle;
+    let pageTitle = title || this.siteTitle;
 
     // Add pagination
-    // const pageNumber = this.keyPathVal(
-    //   scope.contexts[0],
-    //   "pagination.pageNumber",
-    //   0
-    // );
-    const pageNumber = 0;
     if (pageNumber > 0) {
       pageTitle = pageTitle + ` ${divider} Page ` + (pageNumber + 1);
     }
@@ -31,21 +18,35 @@ class PageTitle {
     // if we have a title available
     // and unless the title already is the sitename
     // and the style is not minimalistic
-    if (this.title && this.title != this.siteTitle && style != "minimalistic") {
+    if (title && title != this.siteTitle && style != "minimalistic") {
       pageTitle = `${pageTitle} ${divider} ${this.siteTitle}`;
     }
 
     return this.entities.encode(pageTitle);
   }
 
-  keyPathVal(obj, path, defaultValue) {
-    try {
-      return (
-        path.split(".").reduce((res, prop) => res[prop], obj) || defaultValue
-      );
-    } catch (error) {
-      return defaultValue;
-    }
+  liquidRender(scope, hash) {
+    // Get title from front matter.
+    const title = scope.contexts[0].excerpt;
+
+    // Get page number from pagination.
+    const pageNumber = this.keyPathVal(
+      scope.contexts[0],
+      "pagination.pageNumber",
+      0
+    );
+
+    return Promise.resolve(this.render(title, pageNumber));
+  }
+
+  nunjucksRender(self, context) {
+    // Get title from front matter.
+    const title = context.ctx.title;
+
+    // Get page number from pagination.
+    const pageNumber = self.keyPathVal(context.ctx, "pagination.pageNumber", 0);
+
+    return self.render(title, pageNumber);
   }
 }
 

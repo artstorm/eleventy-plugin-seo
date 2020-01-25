@@ -1,8 +1,6 @@
 const Config = require("./src/Config");
+const Liquid = require("./src/Engines/Liquid");
 const Nunjucks = require("./src/Engines/Nunjucks");
-const SEO = require("./src/SEO");
-const Title = require("./src/Title");
-const Description = require("./src/Description");
 const Canonical = require("./src/Canonical");
 const MetaRobots = require("./src/MetaRobots");
 const MetaAuthor = require("./src/MetaAuthor");
@@ -13,22 +11,8 @@ module.exports = {
   configFunction: (eleventyConfig, options = {}) => {
     const config = new Config(options);
 
-    const nunjucks = new Nunjucks(eleventyConfig);
-
-    eleventyConfig.addLiquidTag("seo", liquidEngine => {
-      const seo = new SEO(liquidEngine, config);
-      return seo.getObject();
-    });
-
-    eleventyConfig.addLiquidTag("pageTitle", liquidEngine => {
-      const title = new Title(liquidEngine, config);
-      return title.getObject();
-    });
-
-    eleventyConfig.addLiquidTag("pageDescription", liquidEngine => {
-      const description = new Description(liquidEngine, config);
-      return description.getObject();
-    });
+    const liquid = new Liquid(config, eleventyConfig);
+    const nunjucks = new Nunjucks(config, eleventyConfig);
 
     eleventyConfig.addLiquidTag("canonicalURL", liquidEngine => {
       const canonical = new Canonical(liquidEngine, config);
