@@ -1,10 +1,7 @@
 const BaseTag = require("./BaseTag");
 
-class Title extends BaseTag {
-  render(scope, hash) {
-    // Get title from front matter.
-    const title = scope.contexts[0].title;
-
+class PageTitle extends BaseTag {
+  render(title, pageNumber) {
     // Get options.
     const style = this.keyPathVal(this, "options.titleStyle", "default");
     const divider = this.keyPathVal(this, "options.titleDivider", "-");
@@ -13,11 +10,6 @@ class Title extends BaseTag {
     let pageTitle = title || this.siteTitle;
 
     // Add pagination
-    const pageNumber = this.keyPathVal(
-      scope.contexts[0],
-      "pagination.pageNumber",
-      0
-    );
     if (pageNumber > 0) {
       pageTitle = pageTitle + ` ${divider} Page ` + (pageNumber + 1);
     }
@@ -30,8 +22,32 @@ class Title extends BaseTag {
       pageTitle = `${pageTitle} ${divider} ${this.siteTitle}`;
     }
 
-    return Promise.resolve(this.entities.encode(pageTitle));
+    return this.entities.encode(pageTitle);
+  }
+
+  liquidRender(scope, hash) {
+    // Get title from front matter.
+    const title = scope.contexts[0].excerpt;
+
+    // Get page number from pagination.
+    const pageNumber = this.keyPathVal(
+      scope.contexts[0],
+      "pagination.pageNumber",
+      0
+    );
+
+    return Promise.resolve(this.render(title, pageNumber));
+  }
+
+  nunjucksRender(self, context) {
+    // Get title from front matter.
+    const title = context.ctx.title;
+
+    // Get page number from pagination.
+    const pageNumber = self.keyPathVal(context.ctx, "pagination.pageNumber", 0);
+
+    return self.render(title, pageNumber);
   }
 }
 
-module.exports = Title;
+module.exports = PageTitle;
