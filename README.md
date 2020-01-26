@@ -1,6 +1,6 @@
 # About Eleventy Plugin SEO
 
-An [Eleventy](https://github.com/11ty/eleventy) plugin to generate meta tags for improved SEO using the Liquid templating engine.
+An [Eleventy](https://github.com/11ty/eleventy) plugin to generate meta tags for improved SEO using the Liquid or Nujucks templating engines.
 
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/CI/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
 [![GitHub Actions](https://github.com/artstorm/eleventy-plugin-seo/workflows/style/badge.svg)](https://github.com/artstorm/eleventy-plugin-seo/actions)
@@ -19,6 +19,7 @@ _I wrote this plugin when moving from Jekyll to Eleventy to get the functionalit
 * Author meta directive.
 * Open Graph markup.
 * Twitter Card markup.
+* Supports Liquid and Nunjucks.
 
 ## Installation
 
@@ -42,8 +43,14 @@ module.exports =  function(eleventyConfig) {
 
 Add the following right before `</head>` in your site's template(s):
 
-```liquid
+Liquid:
+```
 {% seo %}
+```
+
+Nunjucks:
+```
+{% seo "" %}
 ```
 
 Done!
@@ -136,6 +143,6 @@ Changes the divider between elements in the title output from `-` to any custom 
 
 ## Additional Tags
 
-While adding the `{% seo %}` tag is all that is needed, the plugin defines more liquid tags that it uses internally that can be convenient to use in other places.
+While adding the `seo` tag is all that is needed, the plugin defines more tags that it uses internally that can be convenient to use in other places.
 
 * [Additional Tags](doc/additional-tags.md)
