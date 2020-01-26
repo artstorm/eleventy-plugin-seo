@@ -6,6 +6,8 @@ class BaseTag {
     this._config = config;
     this.engine = engine;
 
+    this.id = Math.random();
+
     this.entities = new htmlEntities();
   }
 
@@ -33,15 +35,6 @@ class BaseTag {
     return this.config.url;
   }
 
-  image(scope) {
-    // Fallback on using image in config if available and none is set in front matter.
-    if (!scope.contexts[0].image && this.config.image) {
-      scope.contexts[0].image = this.config.image;
-    }
-
-    return scope;
-  }
-
   getLiquidTag() {
     return {
       parse: (tagToken, remainToken) => this.liquidParse(tagToken, remainToken),
@@ -66,10 +59,10 @@ class BaseTag {
     return new (function() {
       this.tags = [tag];
       this.parse = parse;
-      this.run = (context, myStringArg, callback) => {
+      this.run = (context, args, callback) => {
         callback(
           null,
-          new nunjucksEngine.runtime.SafeString(render(self, context))
+          new nunjucksEngine.runtime.SafeString(render(self, context, args))
         );
       };
     })();
@@ -84,7 +77,7 @@ class BaseTag {
     return new nodes.CallExtensionAsync(this, "run", args);
   }
 
-  nunjucksRender(self, context) {
+  nunjucksRender(self, context, args) {
     // To be implemented by subclass to handle nunjucks tag rendering.
   }
 
