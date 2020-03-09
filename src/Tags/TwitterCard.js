@@ -11,6 +11,9 @@ class TwitterCard extends BaseTag {
       scope.contexts[0].image = this.config.image;
     }
 
+    // Add base url from config to front matter image value
+    scope.contexts[0].image = this.config.url + scope.contexts[0].image;
+
     // Get twitter username for site from config.
     if (this.config.twitter) {
       scope.contexts[0].siteTwitter = this.config.twitter;
@@ -28,6 +31,9 @@ class TwitterCard extends BaseTag {
     if (!context.ctx.image && self.config.image) {
       context.ctx.image = self.config.image;
     }
+
+    // Add base url from config to front matter image value
+    context.ctx.image = self.config.url + context.ctx.image;
 
     // Get twitter username for site from config.
     if (self.config.twitter) {

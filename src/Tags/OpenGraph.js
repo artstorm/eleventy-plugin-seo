@@ -11,6 +11,9 @@ class OpenGraph extends BaseTag {
       scope.contexts[0].image = this.config.image;
     }
 
+    // Add base url from config to front matter image value
+    scope.contexts[0].image = this.config.url + scope.contexts[0].image;
+
     // Default `og:type` to article if none is set
     if (!scope.contexts[0].ogtype) {
       scope.contexts[0].ogtype = "article";
@@ -28,6 +31,9 @@ class OpenGraph extends BaseTag {
     if (!context.ctx.image && self.config.image) {
       context.ctx.image = self.config.image;
     }
+
+    // Add base url from config to front matter image value
+    context.ctx.image = self.config.url + context.ctx.image;
 
     // Default `og:type` to article if none is set
     if (!context.ctx.ogtype) {
