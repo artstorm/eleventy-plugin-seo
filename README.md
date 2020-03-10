@@ -128,7 +128,8 @@ eleventyConfig.addPlugin(pluginSEO, {
   ...
   options: {
     titleStyle: "minimalistic",
-    titleDivider: "|"
+    titleDivider: "|",
+      imageWithBaseUrl: true
   }
 });
 ```  
@@ -140,6 +141,10 @@ Setting the style to `minimalistic` removes the appending of the site title to a
 #### titleDivider
 
 Changes the divider between elements in the title output from `-` to any custom character or string.
+
+#### imageWithBaseUrl
+
+Prepends the config `url` to the `image` option.
 
 ## Additional Tags
 
