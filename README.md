@@ -81,7 +81,7 @@ eleventyConfig.addPlugin(pluginSEO, {
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   url: "https://foo.com",
   author: "Jane Doe",
-  author: "username",
+  twitter: "username",
   image: "foo.jpg"
 });
 ```  
