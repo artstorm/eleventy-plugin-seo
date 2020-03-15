@@ -7,7 +7,11 @@ const BaseTag = require("./BaseTag");
 class TwitterCard extends BaseTag {
   async liquidRender(scope, hash) {
     // Fallback on using image in config if available and none is set in front matter.
-    const image = !scope.contexts[0].image && this.config.image ? this.config.image : scope.contexts[0].image;
+    const hasConfigImageOnly = !scope.contexts[0].image && this.config.image;
+
+    const image = hasConfigImageOnly
+      ? this.config.image
+      : scope.contexts[0].image;
 
     // Add base url from config to front matter image value
     const baseImage = this.config.url + image;
