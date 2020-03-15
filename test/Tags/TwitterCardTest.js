@@ -113,3 +113,113 @@ test("nunjucks: twitter in config should generate site:twitter", t => {
 
   t.is(result.context.siteTwitter, "foo");
 });
+
+test("liquid: image set in config with imageWithBaseUrl set to false should be equal to config image value", t => {
+  const config = new Config({
+    options: { imageWithBaseUrl: false },
+    image: "bar.jpg"
+  });
+  const twitterCard = new TwitterCard(config, t.context.liquidEngineMock);
+  const object = twitterCard.getLiquidTag();
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result.contexts.image, "bar.jpg");
+  });
+});
+
+test("nunjucks: image set in config with imageWithBaseUrl set to false should be equal to config image value", t => {
+  const config = new Config({
+    options: { imageWithBaseUrl: false },
+    image: "bar.jpg"
+  });
+  const twitterCard = new TwitterCard(config);
+
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.is(result.context.image, "bar.jpg");
+});
+
+test("liquid: image set in front matter with imageWithBaseUrl set to false should be equal to front matter image value", t => {
+  const config = new Config({ options: { imageWithBaseUrl: false } });
+  const twitterCard = new TwitterCard(config, t.context.liquidEngineMock);
+  const object = twitterCard.getLiquidTag();
+  t.context.scope.contexts[0].image = "foo.jpg";
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result.contexts.image, "foo.jpg");
+  });
+});
+
+test("nunjucks: image set in front matter with imageWithBaseUrl set to false should be equal to front matter image value", t => {
+  const config = new Config({ options: { imageWithBaseUrl: false } });
+  const twitterCard = new TwitterCard(config);
+  t.context.nunjucksContextMock.ctx.image = "foo.jpg";
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.is(result.context.image, "foo.jpg");
+});
+
+test("liquid: image set in config with imageWithBaseUrl set to true should be equal to config url + config image values", t => {
+  const config = new Config({
+    options: { imageWithBaseUrl: true },
+    image: "/bar.jpg",
+    url: "https://example.com"
+  });
+  const twitterCard = new TwitterCard(config, t.context.liquidEngineMock);
+  const object = twitterCard.getLiquidTag();
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result.contexts.image, "https://example.com/bar.jpg");
+  });
+});
+
+test("nunjucks: image set in config with imageWithBaseUrl set to true should be equal to config url + config image values", t => {
+  const config = new Config({
+    options: { imageWithBaseUrl: true },
+    image: "/bar.jpg",
+    url: "https://example.com"
+  });
+  const twitterCard = new TwitterCard(config);
+
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.is(result.context.image, "https://example.com/bar.jpg");
+});
+
+test("liquid: image set in front matter with imageWithBaseUrl set to true should be equal to config url + front matter image values", t => {
+  const config = new Config({
+    options: { imageWithBaseUrl: true },
+    url: "https://example.com"
+  });
+  const twitterCard = new TwitterCard(config, t.context.liquidEngineMock);
+  const object = twitterCard.getLiquidTag();
+  t.context.scope.contexts[0].image = "/foo.jpg";
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result.contexts.image, "https://example.com/foo.jpg");
+  });
+});
+
+test("nunjucks: image set in front matter with imageWithBaseUrl set to true should be equal to config url + front matter image values", t => {
+  const config = new Config({
+    options: { imageWithBaseUrl: true },
+    url: "https://example.com"
+  });
+  const twitterCard = new TwitterCard(config);
+  t.context.nunjucksContextMock.ctx.image = "/foo.jpg";
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.is(result.context.image, "https://example.com/foo.jpg");
+});
