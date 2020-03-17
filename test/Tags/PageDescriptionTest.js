@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import PageDescription from "../../src/Tags/PageDescription";
+const test = require("ava");
+const Config = require("../../src/Config");
+const PageDescription = require("../../src/Tags/PageDescription");
 
 test.beforeEach(t => {
   t.context.scope = {

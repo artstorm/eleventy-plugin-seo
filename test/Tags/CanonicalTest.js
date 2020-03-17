@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import Canonical from "../../src/Tags/Canonical";
+const test = require("ava");
+const Config = require("../../src/Config");
+const Canonical = require("../../src/Tags/Canonical");
 
 test.beforeEach(t => {
   t.context.scope = {

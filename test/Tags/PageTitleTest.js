@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import PageTitle from "../../src/Tags/PageTitle";
+const test = require("ava");
+const Config = require("../../src/Config");
+const PageTitle = require("../../src/Tags/PageTitle");
 
 test.beforeEach(t => {
   t.context.config = new Config({ title: "Site title" });
@@ -69,7 +69,7 @@ test("Liquid engine should provide front matter title", t => {
   let scope = {
     contexts: [
       {
-        excerpt: "Front matter title"
+        title: "Front matter title"
       }
     ]
   };

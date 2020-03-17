@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import SEO from "../../src/Tags/SEO";
+const test = require("ava");
+const Config = require("../../src/Config");
+const SEO = require("../../src/Tags/SEO");
 
 test.before(t => {
   t.context.scope = {
