@@ -163,7 +163,10 @@ test("liquid: image set in config with imageWithBaseUrl set to false should be e
 });
 
 test("nunjucks: image set in config with imageWithBaseUrl set to false should be equal to config image value", t => {
-  const config = new Config({ options: { imageWithBaseUrl: false }, image: "bar.jpg" });
+  const config = new Config({
+    options: { imageWithBaseUrl: false },
+    image: "bar.jpg"
+  });
   const openGraph = new OpenGraph(config);
 
   const result = openGraph.nunjucksRender(
@@ -186,7 +189,7 @@ test("liquid: image set in front matter with imageWithBaseUrl set to false shoul
 });
 
 test("nunjucks: image set in front matter with imageWithBaseUrl set to false should be equal to front matter image value", t => {
-  const config = new Config({ options: { imageWithBaseUrl: false }});
+  const config = new Config({ options: { imageWithBaseUrl: false } });
   const openGraph = new OpenGraph(config);
   t.context.nunjucksContextMock.ctx.image = "foo.jpg";
   const result = openGraph.nunjucksRender(
@@ -212,7 +215,11 @@ test("liquid: image set in config with imageWithBaseUrl set to true should be eq
 });
 
 test("nunjucks: image set in config with imageWithBaseUrl set to true should be equal to config url + config image values", t => {
-  const config = new Config({ options: { imageWithBaseUrl: true }, image: "/bar.jpg", url: "https://example.com" });
+  const config = new Config({
+    options: { imageWithBaseUrl: true },
+    image: "/bar.jpg",
+    url: "https://example.com"
+  });
   const openGraph = new OpenGraph(config);
 
   const result = openGraph.nunjucksRender(
@@ -238,7 +245,10 @@ test("liquid: image set in front matter with imageWithBaseUrl set to true should
 });
 
 test("nunjucks: image set in front matter with imageWithBaseUrl set to true should be equal to config url + front matter image values", t => {
-  const config = new Config({ options: { imageWithBaseUrl: true }, url: "https://example.com" });
+  const config = new Config({
+    options: { imageWithBaseUrl: true },
+    url: "https://example.com"
+  });
   const openGraph = new OpenGraph(config);
   t.context.nunjucksContextMock.ctx.image = "/foo.jpg";
   const result = openGraph.nunjucksRender(
