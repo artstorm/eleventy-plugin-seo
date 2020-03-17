@@ -1,4 +1,4 @@
-const test = require('ava');
+const test = require("ava");
 const Config = require("../src/Config");
 
 test("Config gets default values", t => {

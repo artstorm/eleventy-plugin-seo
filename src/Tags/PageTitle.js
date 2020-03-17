@@ -27,7 +27,11 @@ class PageTitle extends BaseTag {
 
   liquidRender(scope, hash) {
     // Get title from front matter.
-    const title = (typeof scope.contexts[0].renderData !== "undefined" && typeof scope.contexts[0].renderData.title !== "undefined" ? scope.contexts[0].renderData.title : scope.contexts[0].title);
+    const title =
+      typeof scope.contexts[0].renderData !== "undefined" &&
+      typeof scope.contexts[0].renderData.title !== "undefined"
+        ? scope.contexts[0].renderData.title
+        : scope.contexts[0].title;
 
     // Get page number from pagination.
     const pageNumber = this.keyPathVal(
@@ -41,7 +45,11 @@ class PageTitle extends BaseTag {
 
   nunjucksRender(self, context) {
     // Get title from front matter.
-    const title = (typeof context.ctx.renderData !== "undefined" && typeof context.ctx.renderData.title !== "undefined" ? context.ctx.renderData.title : context.ctx.title);
+    const title =
+      typeof context.ctx.renderData !== "undefined" &&
+      typeof context.ctx.renderData.title !== "undefined"
+        ? context.ctx.renderData.title
+        : context.ctx.title;
 
     // Get page number from pagination.
     const pageNumber = self.keyPathVal(context.ctx, "pagination.pageNumber", 0);
