@@ -129,7 +129,7 @@ eleventyConfig.addPlugin(pluginSEO, {
   options: {
     titleStyle: "minimalistic",
     titleDivider: "|",
-      imageWithBaseUrl: true
+    imageWithBaseUrl: true
   }
 });
 ```  
