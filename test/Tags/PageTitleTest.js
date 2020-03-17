@@ -81,6 +81,23 @@ test("Liquid engine should provide front matter title", t => {
   });
 });
 
+test("Liquid engine should use computed title", t => {
+  // Mock liquid engine scope
+  let scope = {
+    contexts: [
+      {
+        renderData: { title: "A computed title" }
+      }
+    ]
+  };
+
+  const pageTitle = new PageTitle(t.context.config);
+
+  return pageTitle.liquidRender(scope).then(result => {
+    t.is(result, "A computed title - Site title");
+  });
+});
+
 test("Nunjucks engine should provide front matter title", t => {
   // Mock nunjucks engine context
   let context = {
@@ -93,4 +110,18 @@ test("Nunjucks engine should provide front matter title", t => {
   let title = pageTitle.nunjucksRender(pageTitle, context);
 
   t.is(title, "Front matter title - Site title");
+});
+
+test("Nunjucks engine should use computed title", t => {
+  // Mock nunjucks engine context
+  let context = {
+    ctx: {
+      renderData: { title: "A computed title" }
+    }
+  };
+
+  const pageTitle = new PageTitle(t.context.config);
+  let title = pageTitle.nunjucksRender(pageTitle, context);
+
+  t.is(title, "A computed title - Site title");
 });
