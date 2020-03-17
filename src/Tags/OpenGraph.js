@@ -16,14 +16,6 @@ class OpenGraph extends BaseTag {
     // Add base url from config to front matter image value
     const baseImage = this.config.url + image;
 
-    // Get and set imageWithBaseUrl option
-    const imageWithBaseUrl =
-      this.config.url &&
-      "options" in this.config &&
-      this.config.options.imageWithBaseUrl
-        ? true
-        : false;
-
     // Default `og:type` to article if none is set
     const ogtype = !scope.contexts[0].ogtype
       ? "article"
@@ -33,7 +25,7 @@ class OpenGraph extends BaseTag {
     const templateContext = {
       ...scope.contexts[0],
       ogtype,
-      image: imageWithBaseUrl ? baseImage : image
+      image: this.useImageWithBaseURL(this.config) ? baseImage : image
     };
 
     const source = this.loadTemplate("opengraph.liquid");
@@ -53,14 +45,6 @@ class OpenGraph extends BaseTag {
     // Add base url from config to front matter image value
     const baseImage = self.config.url + image;
 
-    // Get and set imageWithBaseUrl option
-    const imageWithBaseUrl =
-      self.config.url &&
-      "options" in self.config &&
-      self.config.options.imageWithBaseUrl
-        ? true
-        : false;
-
     // Default `og:type` to article if none is set
     const ogtype = !context.ctx.ogtype ? "article" : context.ctx.ogtype;
 
@@ -68,13 +52,26 @@ class OpenGraph extends BaseTag {
     const templateContext = {
       ...context.ctx,
       ogtype,
-      image: imageWithBaseUrl ? baseImage : image
+      image: self.useImageWithBaseURL(self.config) ? baseImage : image
     };
 
     const template = self.loadTemplate("opengraph.njk");
     const rendered = context.env.renderString(template, templateContext);
 
     return rendered;
+  }
+
+  /**
+   * Determine if Base URL should be prepended to the image.
+   *
+   * @param {Object} config
+   *
+   * @return {Bool}
+   */
+  useImageWithBaseURL(config) {
+    return config.url && "options" in config && config.options.imageWithBaseUrl
+      ? true
+      : false;
   }
 }
 

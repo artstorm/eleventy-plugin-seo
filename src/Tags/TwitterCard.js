@@ -16,14 +16,6 @@ class TwitterCard extends BaseTag {
     // Add base url from config to front matter image value
     const baseImage = this.config.url + image;
 
-    // Get and set imageWithBaseUrl option
-    const imageWithBaseUrl =
-      this.config.url &&
-      "options" in this.config &&
-      this.config.options.imageWithBaseUrl
-        ? true
-        : false;
-
     // Get twitter username for site from config.
     const siteTwitter =
       !scope.contexts[0].siteTwitter && this.config.twitter
@@ -34,7 +26,7 @@ class TwitterCard extends BaseTag {
     const templateContext = {
       ...scope.contexts[0],
       siteTwitter,
-      image: imageWithBaseUrl ? baseImage : image
+      image: this.useImageWithBaseURL(this.config) ? baseImage : image
     };
 
     const source = this.loadTemplate("twittercard.liquid");
@@ -54,14 +46,6 @@ class TwitterCard extends BaseTag {
     // Add base url from config to front matter image value
     const baseImage = self.config.url + image;
 
-    // Get and set imageWithBaseUrl option
-    const imageWithBaseUrl =
-      self.config.url &&
-      "options" in self.config &&
-      self.config.options.imageWithBaseUrl
-        ? true
-        : false;
-
     // Get twitter username for site from config.
     const siteTwitter =
       !context.ctx.siteTwitter && self.config.twitter
@@ -72,13 +56,26 @@ class TwitterCard extends BaseTag {
     const templateContext = {
       ...context.ctx,
       siteTwitter,
-      image: imageWithBaseUrl ? baseImage : image
+      image: self.useImageWithBaseURL(self.config) ? baseImage : image
     };
 
     const template = self.loadTemplate("twittercard.njk");
     const rendered = context.env.renderString(template, templateContext);
 
     return rendered;
+  }
+
+  /**
+   * Determine if Base URL should be prepended to the image.
+   *
+   * @param {Object} config
+   *
+   * @return {Bool}
+   */
+  useImageWithBaseURL(config) {
+    return config.url && "options" in config && config.options.imageWithBaseUrl
+      ? true
+      : false;
   }
 }
 
