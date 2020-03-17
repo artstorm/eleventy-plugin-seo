@@ -1,5 +1,5 @@
-import test from "ava";
-import MetaRobots from "../../src/Tags/MetaRobots";
+const test = require("ava");
+const MetaRobots = require("../../src/Tags/MetaRobots");
 
 test("Ordinary pages gets index and follow", t => {
   const metaRobots = new MetaRobots();

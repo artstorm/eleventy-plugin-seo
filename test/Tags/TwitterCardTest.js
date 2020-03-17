@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import TwitterCard from "../../src/Tags/TwitterCard";
+const test = require("ava");
+const Config = require("../../src/Config");
+const TwitterCard = require("../../src/Tags/TwitterCard");
 
 test.beforeEach(t => {
   t.context.scope = {

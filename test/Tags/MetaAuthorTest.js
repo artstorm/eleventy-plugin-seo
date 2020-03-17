@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import MetaAuthor from "../../src/Tags/MetaAuthor";
+const test = require("ava");
+const Config = require("../../src/Config");
+const MetaAuthor = require("../../src/Tags/MetaAuthor");
 
 test.beforeEach(t => {
   t.context.config = new Config({ author: "foo bar" });

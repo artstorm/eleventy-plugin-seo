@@ -1,5 +1,5 @@
-import test from "ava";
-import Config from "../src/Config";
+const test = require("ava");
+const Config = require("../src/Config");
 
 test("Config gets default values", t => {
   const config = new Config();

@@ -1,6 +1,6 @@
-import test from "ava";
-import Config from "../../src/Config";
-import OpenGraph from "../../src/Tags/OpenGraph";
+const test = require("ava");
+const Config = require("../../src/Config");
+const OpenGraph = require("../../src/Tags/OpenGraph");
 
 test.beforeEach(t => {
   t.context.scope = {

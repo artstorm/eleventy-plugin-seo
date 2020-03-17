@@ -1,5 +1,5 @@
-import test from "ava";
-import BaseTag from "../../src/Tags/BaseTag";
+const test = require("ava");
+const BaseTag = require("../../src/Tags/BaseTag");
 
 test("Should have an liquid tag that can call render and parse", t => {
   const tag = new BaseTag();
