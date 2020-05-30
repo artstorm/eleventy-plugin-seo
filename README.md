@@ -129,7 +129,8 @@ eleventyConfig.addPlugin(pluginSEO, {
   options: {
     titleStyle: "minimalistic",
     titleDivider: "|",
-    imageWithBaseUrl: true
+    imageWithBaseUrl: true,
+    twitterCardType: "summary_large_image"
   }
 });
 ```  
@@ -145,6 +146,10 @@ Changes the divider between elements in the title output from `-` to any custom 
 #### imageWithBaseUrl
 
 Prepends the config `url` to the `image` option.
+
+#### twitterCardType
+
+Card type for Twitter card. Default is `summary`.
 
 ## Additional Tags
 
