@@ -1,7 +1,8 @@
 class Config {
   constructor(config = {}) {
     const defaults = {
-      url: ""
+      url: "",
+      twitterCardType: "summary"
     };
     config = { ...defaults, ...config };
 
