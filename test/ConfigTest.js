@@ -6,3 +6,10 @@ test("Config gets default values", t => {
 
   t.is("", config.get().url);
 });
+
+test("Config can merge deep", t => {
+  const config = new Config({ options: { foo: "bar" } });
+
+  t.is("bar", config.get().options.foo);
+  t.is("summary", config.get().options.twitterCardType);
+});
