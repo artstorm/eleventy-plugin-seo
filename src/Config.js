@@ -1,10 +1,14 @@
+const { merge } = require("lodash");
+
 class Config {
   constructor(config = {}) {
     const defaults = {
       url: "",
-      twitterCardType: "summary"
+      options: {
+        twitterCardType: "summary"
+      }
     };
-    config = { ...defaults, ...config };
+    config = merge(defaults, config);
 
     this.config = config;
   }
