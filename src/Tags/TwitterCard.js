@@ -27,7 +27,7 @@ class TwitterCard extends BaseTag {
       ...scope.contexts[0],
       siteTwitter,
       image: this.useImageWithBaseURL(this.config) ? baseImage : image,
-      cardType: this.config.twitterCardType
+      cardType: this.keyPathVal(this, "options.twitterCardType")
     };
 
     const source = this.loadTemplate("twittercard.liquid");
@@ -58,7 +58,7 @@ class TwitterCard extends BaseTag {
       ...context.ctx,
       siteTwitter,
       image: self.useImageWithBaseURL(self.config) ? baseImage : image,
-      cardType: self.config.twitterCardType
+      cardType: self.keyPathVal(self, "options.twitterCardType")
     };
 
     const template = self.loadTemplate("twittercard.njk");

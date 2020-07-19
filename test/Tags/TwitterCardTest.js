@@ -249,7 +249,7 @@ test("nunjucks: liquid: card type should be set to summary by default", t => {
 });
 
 test("liquid: card type should be set to summary_large_image", t => {
-  const config = new Config({ twitterCardType: "summary_large_image" });
+  const config = new Config({ options: { twitterCardType: "summary_large_image" } });
   const twitterCard = new TwitterCard(config);
   const result = twitterCard.nunjucksRender(
     twitterCard,
@@ -262,7 +262,7 @@ test("liquid: card type should be set to summary_large_image", t => {
 });
 
 test("nunjucks: liquid: card type should be set to summary_large_image", t => {
-  const config = new Config({ twitterCardType: "summary_large_image" });
+  const config = new Config({ options: { twitterCardType: "summary_large_image" } });
   const twitterCard = new TwitterCard(config);
   const result = twitterCard.nunjucksRender(
     twitterCard,
