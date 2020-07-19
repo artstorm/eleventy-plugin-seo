@@ -223,3 +223,51 @@ test("nunjucks: image set in front matter with imageWithBaseUrl set to true shou
 
   t.is(result.context.image, "https://example.com/foo.jpg");
 });
+
+test("liquid: card type should be set to summary by default", t => {
+  const config = new Config();
+  const twitterCard = new TwitterCard(config);
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.log(result);
+
+  t.is(result.context.cardType, "summary");
+});
+
+test("nunjucks: liquid: card type should be set to summary by default", t => {
+  const config = new Config();
+  const twitterCard = new TwitterCard(config);
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.is(result.context.cardType, "summary");
+});
+
+test("liquid: card type should be set to summary_large_image", t => {
+  const config = new Config({ twitterCardType: "summary_large_image" });
+  const twitterCard = new TwitterCard(config);
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.log(result);
+
+  t.is(result.context.cardType, "summary_large_image");
+});
+
+test("nunjucks: liquid: card type should be set to summary_large_image", t => {
+  const config = new Config({ twitterCardType: "summary_large_image" });
+  const twitterCard = new TwitterCard(config);
+  const result = twitterCard.nunjucksRender(
+    twitterCard,
+    t.context.nunjucksContextMock
+  );
+
+  t.is(result.context.cardType, "summary_large_image");
+});
