@@ -58,7 +58,7 @@ class TwitterCard extends BaseTag {
       ...context.ctx,
       siteTwitter,
       image: self.useImageWithBaseURL(self.config) ? baseImage : image,
-      cardType: this.config.twitterCardType
+      cardType: self.config.twitterCardType
     };
 
     const template = self.loadTemplate("twittercard.njk");
