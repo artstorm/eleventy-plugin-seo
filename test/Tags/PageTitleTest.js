@@ -30,7 +30,7 @@ test("Title should be escaped", t => {
 
 test("Page and pagenumber should be added on paginated pages", t => {
   const pageTitle = new PageTitle(t.context.config);
-  let title = pageTitle.render("A title", 1);
+  let title = pageTitle.render("A title", 1, 2);
 
   t.is(title, "A title - Page 2 - Site title");
 });
@@ -38,6 +38,13 @@ test("Page and pagenumber should be added on paginated pages", t => {
 test("Page and pagenumber should not be added on paginated pages with pageNumber 0", t => {
   const pageTitle = new PageTitle(t.context.config);
   let title = pageTitle.render("A title", 0);
+
+  t.is(title, "A title - Site title");
+});
+
+test("Page and pagenumber should not be added on paginated pages with size 1", t => {
+  const pageTitle = new PageTitle(t.context.config);
+  let title = pageTitle.render("A title", 1, 1);
 
   t.is(title, "A title - Site title");
 });

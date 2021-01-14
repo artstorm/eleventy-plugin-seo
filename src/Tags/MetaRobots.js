@@ -1,10 +1,10 @@
 const BaseTag = require("./BaseTag");
 
 class MetaRobots extends BaseTag {
-  render(pageNumber) {
+  render(pageNumber, size) {
     let robots = "index,follow";
 
-    if (pageNumber > 0) {
+    if (pageNumber > 0 && size > 1) {
       robots = `no${robots}`;
     }
 
@@ -19,14 +19,24 @@ class MetaRobots extends BaseTag {
       0
     );
 
-    return Promise.resolve(this.render(pageNumber));
+    // Get page size from pagination.
+    const size = this.keyPathVal(
+      scope.contexts[0],
+      "pagination.size",
+      0
+    );
+
+    return Promise.resolve(this.render(pageNumber, size));
   }
 
   nunjucksRender(self, context) {
     // Get page number from pagination.
     const pageNumber = self.keyPathVal(context.ctx, "pagination.pageNumber", 0);
 
-    return self.render(pageNumber);
+    // Get page size from pagination.
+    const size = self.keyPathVal(context.ctx, "pagination.size", 0);
+
+    return self.render(pageNumber, size);
   }
 }
 

@@ -1,7 +1,7 @@
 const BaseTag = require("./BaseTag");
 
 class PageTitle extends BaseTag {
-  render(title, pageNumber) {
+  render(title, pageNumber, size) {
     // Get options.
     const style = this.keyPathVal(this, "options.titleStyle", "default");
     const divider = this.keyPathVal(this, "options.titleDivider", "-");
@@ -10,7 +10,7 @@ class PageTitle extends BaseTag {
     let pageTitle = title || this.siteTitle;
 
     // Add pagination
-    if (pageNumber > 0) {
+    if (pageNumber > 0 && size > 1) {
       pageTitle = pageTitle + ` ${divider} Page ` + (pageNumber + 1);
     }
 
@@ -40,7 +40,14 @@ class PageTitle extends BaseTag {
       0
     );
 
-    return Promise.resolve(this.render(title, pageNumber));
+    // Get page size from pagination.
+    const size = this.keyPathVal(
+      scope.contexts[0],
+      "pagination.size",
+      0
+    );
+
+    return Promise.resolve(this.render(title, pageNumber, size));
   }
 
   nunjucksRender(self, context) {
@@ -54,7 +61,10 @@ class PageTitle extends BaseTag {
     // Get page number from pagination.
     const pageNumber = self.keyPathVal(context.ctx, "pagination.pageNumber", 0);
 
-    return self.render(title, pageNumber);
+    // Get page size from pagination.
+    const size = self.keyPathVal(context.ctx, "pagination.size", 0);
+
+    return self.render(title, pageNumber, size);
   }
 }
 
