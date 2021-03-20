@@ -10,9 +10,16 @@ test("Ordinary pages gets index and follow", t => {
 
 test("Paginated pages gets noindex and follow", t => {
   const metaRobots = new MetaRobots();
-  const robots = metaRobots.render(1);
+  const robots = metaRobots.render(1, 2);
 
   t.is(robots, "noindex,follow");
+});
+
+test("Paginated pages with size 1 gets index and follow", t => {
+  const metaRobots = new MetaRobots();
+  const robots = metaRobots.render(1, 1);
+
+  t.is(robots, "index,follow");
 });
 
 test("Missing pagination gets index and follow", t => {
@@ -27,7 +34,7 @@ test("Liquid engine should provide pagination for robots", t => {
   let scope = {
     contexts: [
       {
-        pagination: { pageNumber: 1 }
+        pagination: { pageNumber: 1, size: 2 }
       }
     ]
   };
@@ -43,7 +50,7 @@ test("Nunjucks engine should provide pagination for robots", t => {
   // Mock nunjucks engine context
   let context = {
     ctx: {
-      pagination: { pageNumber: 1 }
+      pagination: { pageNumber: 1, size: 2 }
     }
   };
 
