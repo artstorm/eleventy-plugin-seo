@@ -20,11 +20,7 @@ class MetaRobots extends BaseTag {
     );
 
     // Get page size from pagination.
-    const size = this.keyPathVal(
-      scope.contexts[0],
-      "pagination.size",
-      0
-    );
+    const size = this.keyPathVal(scope.contexts[0], "pagination.size", 0);
 
     return Promise.resolve(this.render(pageNumber, size));
   }
