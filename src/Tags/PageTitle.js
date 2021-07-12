@@ -10,10 +10,10 @@ class PageTitle extends BaseTag {
     let pageTitle = title || this.siteTitle;
 
     // Showing page numbers?
-    const showPageNumbers = this.showPageNumbers( this.config );
+    const showPages = this.showPageNumbers( this.config );
 
     // Add pagination
-    if ( showPageNumbers &&
+    if ( showPages &&
          pageNumber > 0 &&
         size > 1 ) {
       pageTitle = pageTitle + ` ${divider} Page ` + (pageNumber + 1);
@@ -49,10 +49,10 @@ class PageTitle extends BaseTag {
     const size = this.keyPathVal(scope.contexts[0], "pagination.size", 0);
 
     // Showing page numbers?
-    const showPageNumbers = this.showPageNumbers( this.config, scope.contexts[0].renderData );
+    const showPages = this.showPageNumbers( this.config, scope.contexts[0].renderData );
 
     return Promise.resolve(
-      showPageNumbers
+      showPages
         ? this.render(title, pageNumber, size)
         : this.render(title, 0, 0)
     );
@@ -73,30 +73,33 @@ class PageTitle extends BaseTag {
     const size = self.keyPathVal(context.ctx, "pagination.size", 0);
 
     // Showing page numbers?
-    const showPageNumbers = this.showPageNumbers( this.config, context.ctx.renderData );
+    const showPages = this.showPageNumbers( this.config, context.ctx.renderData );
     
-    return showPageNumbers
+    return showPages
       ? self.render(title, pageNumber, size)
       : self.render(title, 0, 0);
   }
 
   showPageNumbers(config, renderData){
      // default
-    let showPageNumbers = true;
+    let show = true;
     
     // global setting
-    if ( "options" in config &&
+    console.log("global config");
+    if ( typeof config != "undefined" &&
+         "options" in config &&
          "showPageNumbers" in config.options ) {
-      showPageNumbers = config.options.showPageNumbers;
+      show = config.options.showPageNumbers;
     }
     
     // page override
+    console.log("page config");
     if ( typeof renderData !== "undefined" &&
-         typeof renderData.showPageNumbers !== "undefined" ) {
-      showPageNumbers = renderData.showPageNumbers;
+         "showPageNumbers" in renderData ) {
+      show = renderData.showPageNumbers;
     }
     
-    return showPageNumbers;
+    return show;
   }
 }
 
