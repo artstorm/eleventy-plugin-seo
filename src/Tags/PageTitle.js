@@ -5,13 +5,17 @@ class PageTitle extends BaseTag {
     // Get options.
     const style = this.keyPathVal(this, "options.titleStyle", "default");
     const divider = this.keyPathVal(this, "options.titleDivider", "-");
-    const show_numbers = this.keyPathVal(this, "options.showPageNumbers", "true");
     
     // Fallback on `title` in config if no title is set for the page.
     let pageTitle = title || this.siteTitle;
 
+    // Showing page numbers?
+    const showPageNumbers = this.showPageNumbers( this.config );
+
     // Add pagination
-    if (show_numbers == "true" && pageNumber > 0 && size > 1) {
+    if ( showPageNumbers &&
+         pageNumber > 0 &&
+        size > 1 ) {
       pageTitle = pageTitle + ` ${divider} Page ` + (pageNumber + 1);
     }
 
@@ -44,7 +48,14 @@ class PageTitle extends BaseTag {
     // Get page size from pagination.
     const size = this.keyPathVal(scope.contexts[0], "pagination.size", 0);
 
-    return Promise.resolve(this.render(title, pageNumber, size));
+    // Showing page numbers?
+    const showPageNumbers = this.showPageNumbers( this.config, scope.contexts[0].renderData );
+
+    return Promise.resolve(
+      showPageNumbers
+        ? this.render(title, pageNumber, size)
+        : this.render(title, 0, 0)
+    );
   }
 
   nunjucksRender(self, context) {
@@ -54,14 +65,38 @@ class PageTitle extends BaseTag {
       typeof context.ctx.renderData.title !== "undefined"
         ? context.ctx.renderData.title
         : context.ctx.title;
-
+        
     // Get page number from pagination.
     const pageNumber = self.keyPathVal(context.ctx, "pagination.pageNumber", 0);
 
     // Get page size from pagination.
     const size = self.keyPathVal(context.ctx, "pagination.size", 0);
 
-    return self.render(title, pageNumber, size);
+    // Showing page numbers?
+    const showPageNumbers = this.showPageNumbers( this.config, context.ctx.renderData );
+    
+    return showPageNumbers
+      ? self.render(title, pageNumber, size)
+      : self.render(title, 0, 0);
+  }
+
+  showPageNumbers(config, renderData){
+     // default
+    let showPageNumbers = true;
+    
+    // global setting
+    if ( "options" in config &&
+         "showPageNumbers" in config.options ) {
+      showPageNumbers = config.options.showPageNumbers;
+    }
+    
+    // page override
+    if ( typeof renderData !== "undefined" &&
+         typeof renderData.showPageNumbers !== "undefined" ) {
+      showPageNumbers = renderData.showPageNumbers;
+    }
+    
+    return showPageNumbers;
   }
 }
 

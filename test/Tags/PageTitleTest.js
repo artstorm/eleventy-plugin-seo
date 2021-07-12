@@ -49,9 +49,12 @@ test("Page and pagenumber should not be added on paginated pages with size 1", t
   t.is(title, "A title - Site title");
 });
 
-test("Page and pagenumber should not be added if configured to not include them", t => {
-  t.context.config.config.options.showPageNumbers = "false";
-  const pageTitle = new PageTitle(t.context.config);
+test("Page and pagenumber should not be added if globally configured to not include them", t => {
+  const config = new Config({
+    title: "Site title",
+    options: { showPageNumbers: false }
+  });
+  const pageTitle = new PageTitle(config);
   let title = pageTitle.render("A title", 1, 2);
 
   t.is(title, "A title - Site title");
@@ -113,6 +116,30 @@ test("Liquid engine should use computed title", t => {
   });
 });
 
+test("Liquid engine should allow for a page to control page number display", t => {
+  // Mock liquid engine scope
+  let scope = {
+    contexts: [
+      {
+        renderData: {
+          title: "A computed title",
+          showPageNumbers: false,
+          pagination: {
+            pageNumber: 2,
+            size: 2
+          }
+        }
+      }
+    ]
+  };
+
+  const pageTitle = new PageTitle(t.context.config);
+
+  return pageTitle.liquidRender(scope).then(result => {
+    t.is(result, "A computed title - Site title");
+  });
+});
+
 test("Nunjucks engine should provide front matter title", t => {
   // Mock nunjucks engine context
   let context = {
@@ -140,3 +167,26 @@ test("Nunjucks engine should use computed title", t => {
 
   t.is(title, "A computed title - Site title");
 });
+
+test("Nunjucks engine should allow for a page to control page number display ", t => {
+  // Mock nunjucks engine context
+  let context = {
+    ctx: {
+      renderData: {
+        title: "A computed title",
+        showPageNumbers: false,
+        pagination: {
+          pageNumber: 2,
+          size: 2
+        }
+      }
+    }
+  };
+
+  const pageTitle = new PageTitle(t.context.config);
+  let title = pageTitle.nunjucksRender(pageTitle, context);
+
+  t.is(title, "A computed title - Site title");
+});
+
+

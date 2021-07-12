@@ -136,7 +136,8 @@ eleventyConfig.addPlugin(pluginSEO, {
     titleStyle: "minimalistic",
     titleDivider: "|",
     imageWithBaseUrl: true,
-    twitterCardType: "summary_large_image"
+    twitterCardType: "summary_large_image",
+    showPageNumbers:
   }
 });
 ```  
