@@ -49,6 +49,14 @@ test("Page and pagenumber should not be added on paginated pages with size 1", t
   t.is(title, "A title - Site title");
 });
 
+test("Page and pagenumber should not be added if configured to not include them", t => {
+  t.context.config.config.options.showPageNumbers = "false";
+  const pageTitle = new PageTitle(t.context.config);
+  let title = pageTitle.render("A title", 1, 2);
+
+  t.is(title, "A title - Site title");
+});
+
 test("Should be able to set custom divider", t => {
   const config = new Config({
     title: "Site title",

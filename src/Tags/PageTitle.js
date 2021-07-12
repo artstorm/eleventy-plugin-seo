@@ -5,12 +5,13 @@ class PageTitle extends BaseTag {
     // Get options.
     const style = this.keyPathVal(this, "options.titleStyle", "default");
     const divider = this.keyPathVal(this, "options.titleDivider", "-");
-
+    const show_numbers = this.keyPathVal(this, "options.showPageNumbers", "true");
+    
     // Fallback on `title` in config if no title is set for the page.
     let pageTitle = title || this.siteTitle;
 
     // Add pagination
-    if (pageNumber > 0 && size > 1) {
+    if (show_numbers == "true" && pageNumber > 0 && size > 1) {
       pageTitle = pageTitle + ` ${divider} Page ` + (pageNumber + 1);
     }
 
