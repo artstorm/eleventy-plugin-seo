@@ -10,7 +10,7 @@ class PageTitle extends BaseTag {
     let pageTitle = title || this.siteTitle;
 
     // Showing page numbers?
-    const showPages = this.showPageNumbers( this.config );
+    const showPages = this.showPageNumbers();
 
     // Add pagination
     if ( showPages &&
@@ -49,7 +49,7 @@ class PageTitle extends BaseTag {
     const size = this.keyPathVal(scope.contexts[0], "pagination.size", 0);
 
     // Showing page numbers?
-    const showPages = this.showPageNumbers( this.config, scope.contexts[0].renderData );
+    const showPages = this.showPageNumbers( scope.contexts[0].renderData );
 
     return Promise.resolve(
       showPages
@@ -73,19 +73,17 @@ class PageTitle extends BaseTag {
     const size = self.keyPathVal(context.ctx, "pagination.size", 0);
 
     // Showing page numbers?
-    const showPages = this.showPageNumbers( this.config, context.ctx.renderData );
+    const showPages = self.showPageNumbers( context.ctx.renderData );
     
     return showPages
       ? self.render(title, pageNumber, size)
       : self.render(title, 0, 0);
   }
 
-  showPageNumbers(config, renderData){
-     // default
+  showPageNumbers( renderData ){
+    const config = this.config;
     let show = true;
-    
-    // global setting
-    console.log("global config");
+
     if ( typeof config != "undefined" &&
          "options" in config &&
          "showPageNumbers" in config.options ) {
@@ -93,7 +91,6 @@ class PageTitle extends BaseTag {
     }
     
     // page override
-    console.log("page config");
     if ( typeof renderData !== "undefined" &&
          "showPageNumbers" in renderData ) {
       show = renderData.showPageNumbers;
