@@ -188,5 +188,3 @@ test("Nunjucks engine should allow for a page to control page number display ", 
 
   t.is(title, "A computed title - Site title");
 });
-
-
