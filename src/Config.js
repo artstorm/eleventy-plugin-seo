@@ -5,7 +5,8 @@ class Config {
     const defaults = {
       url: "",
       options: {
-        twitterCardType: "summary"
+        twitterCardType: "summary",
+        showPageNumbers: true
       }
     };
     config = merge(defaults, config);

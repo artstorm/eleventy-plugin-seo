@@ -67,15 +67,17 @@ The plugin uses these front matters when available:
 
 ```yml
 ---
-title:   Some page title
+title: Some page title
 excerpt: Some page excerpt
-author:  Jane Doe
-image:   foo.jpg
-ogtype:  website
+author: Jane Doe
+image: foo.jpg
+ogtype: website
+showPageNumbers: false
 ---
 ```
 
-`ogtype` defaults to `article`, set it to `website` or something more appropriate via front matter where required.
+* `ogtype` defaults to `article`, set it to `website` or something more appropriate via front matter where required.
+* `showPageNumbers` is `true` by default, but may be turned off globally via [plugin configuration](#Config) or on a per-page basis via a page’s front matter.
 
 ## Config
 
@@ -136,7 +138,8 @@ eleventyConfig.addPlugin(pluginSEO, {
     titleStyle: "minimalistic",
     titleDivider: "|",
     imageWithBaseUrl: true,
-    twitterCardType: "summary_large_image"
+    twitterCardType: "summary_large_image",
+    showPageNumbers: false
   }
 });
 ```  
@@ -156,6 +159,10 @@ Prepends the config `url` to the `image` option.
 #### twitterCardType
 
 Card type for Twitter card. Default is `summary`.
+
+#### showPageNumbers
+
+Enables you to control whether page numbers are displayed in the title, globally. Default is `true`.
 
 ## Additional Tags
 
