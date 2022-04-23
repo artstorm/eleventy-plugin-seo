@@ -3,4 +3,4 @@
 {{ opengraph.type }}
 <meta property="og:url" content="{% canonicalURL "" %}">
 <meta property="og:description" content="{% pageDescription "" %}">
-{% if image %}<meta property="og:image" content="{{ image }}">{% endif %}
+{% if image %}<meta property="og:image{% if image.indexOf("https://") === 0 %}:secure_url{% endif %}" content="{{ image }}">{% endif %}

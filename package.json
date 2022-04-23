@@ -1,6 +1,6 @@
 {
   "name": "eleventy-plugin-seo",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Eleventy plugin to generate meta tags for improved SEO.",
   "main": ".eleventy.js",
   "scripts": {
