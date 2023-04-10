@@ -1,4 +1,5 @@
 const BaseTag = require("./BaseTag");
+const jsdom = require("jsdom");
 
 class PageTitle extends BaseTag {
   render(title, pageNumber, size) {
@@ -8,6 +9,10 @@ class PageTitle extends BaseTag {
 
     // Fallback on `title` in config if no title is set for the page.
     let pageTitle = title || this.siteTitle;
+    
+    // Strip any HTML in the title
+		const dom = new jsdom.JSDOM(`<!DOCTYPE html><h1>${pageTitle}</h1>`);
+    pageTitle = dom.window.document.querySelector("h1").textContent;
 
     // Showing page numbers?
     const showPages = this.showPageNumbers();
