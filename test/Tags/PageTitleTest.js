@@ -102,10 +102,9 @@ test("Liquid engine should provide front matter title", t => {
 test("Liquid engine should provide front matter title when scope is of type Context", t => {
   // Mock liquid engine scope
   let scope = {
-    environments:
-      {
-        title: "Front matter title"
-      }
+    environments: {
+      title: "Front matter title"
+    }
   };
 
   const pageTitle = new PageTitle(t.context.config);

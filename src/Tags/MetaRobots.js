@@ -12,14 +12,13 @@ class MetaRobots extends BaseTag {
   }
 
   liquidRender(scope, hash) {
-    const context = (typeof scope.contexts === "undefined") ? scope.environments : scope.contexts[0];
+    const context =
+      typeof scope.contexts === "undefined"
+        ? scope.environments
+        : scope.contexts[0];
 
     // Get page number from pagination.
-    const pageNumber = this.keyPathVal(
-      context,
-      "pagination.pageNumber",
-      0
-    );
+    const pageNumber = this.keyPathVal(context, "pagination.pageNumber", 0);
 
     // Get page size from pagination.
     const size = this.keyPathVal(context, "pagination.size", 0);

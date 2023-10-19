@@ -42,12 +42,11 @@ test("SEO renders liquid template", t => {
 
 test("SEO renders liquid template when scope is of type Context", t => {
   t.context.scope = {
-    environments:
-      {
-        page: {
-          url: "/foo"
-        }
+    environments: {
+      page: {
+        url: "/foo"
       }
+    }
   };
   // Mock LiquidEngine.
   const liquidEngine = {

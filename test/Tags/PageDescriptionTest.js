@@ -55,10 +55,9 @@ test("Liquid engine should provide front matter excerpt", t => {
 test("Liquid engine should provide front matter excerpt when scope is of type Context", t => {
   // Mock liquid engine scope
   let scope = {
-    environments:
-      {
-        excerpt: "Excerpt in front matter"
-      }
+    environments: {
+      excerpt: "Excerpt in front matter"
+    }
   };
 
   const pageDescription = new PageDescription();
