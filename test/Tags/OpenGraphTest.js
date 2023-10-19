@@ -50,6 +50,31 @@ test("liquid: generates open graph markup", t => {
   });
 });
 
+test("liquid: generates open graph markup when scope is of type Context", t => {
+  t.context.scope = {
+    environments: {}
+  };
+  // Mock liquidEngine
+  const liquidEngine = {
+    parse(template) {
+      return template;
+    },
+    render(template, contexts) {
+      return new Promise(resolve => {
+        resolve(template);
+      });
+    }
+  };
+
+  const config = new Config();
+  const openGraph = new OpenGraph(config, t.context.liquidEngineMock);
+  const object = openGraph.getLiquidTag();
+
+  return object.render(t.context.scope).then(result => {
+    t.truthy(result.template.includes(`og:type`));
+  });
+});
+
 test("nunjucks: generates open graph markup", t => {
   const config = new Config();
   const openGraph = new OpenGraph(config);

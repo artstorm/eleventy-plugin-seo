@@ -38,6 +38,21 @@ test("Liquid engine should provide author", t => {
   });
 });
 
+test("Liquid engine should provide author when scope is of type Context", t => {
+  // Mock liquid engine scope
+  let scope = {
+    environments: {
+      author: "an author"
+    }
+  };
+
+  const metaAuthor = new MetaAuthor(t.context.config);
+
+  return metaAuthor.liquidRender(scope).then(result => {
+    t.is(result, "an author");
+  });
+});
+
 test("Nunjucks engine should provide author", t => {
   // Mock nunjucks engine context
   let context = {

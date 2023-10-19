@@ -38,6 +38,19 @@ test("liquid: page without image falls back on config image", t => {
   });
 });
 
+test("liquid: page without image falls back on config image when scope is of type Context", t => {
+  t.context.scope = {
+    environments: {}
+  };
+  const config = new Config({ image: "foo.jpg" });
+  const twitterCard = new TwitterCard(config, t.context.liquidEngineMock);
+  const object = twitterCard.getLiquidTag();
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result.contexts.image, "foo.jpg");
+  });
+});
+
 test("nunjucks: page without image falls back on config image", t => {
   const config = new Config({ image: "foo.jpg" });
   const twitterCard = new TwitterCard(config);

@@ -20,7 +20,11 @@ class Canonical extends BaseTag {
     }
 
     // Use page data for URL if none was passed with argument.
-    url = url || scope.contexts[0].page.url;
+    const context =
+      typeof scope.contexts === "undefined"
+        ? scope.environments
+        : scope.contexts[0];
+    url = url || context.page.url;
 
     return Promise.resolve(this.render(url));
   }
