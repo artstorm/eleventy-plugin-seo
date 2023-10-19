@@ -9,8 +9,9 @@ class PageDescription extends BaseTag {
   }
 
   liquidRender(scope, hash) {
+    const context = typeof scope.contexts === "undefined" ? scope.environments : scope.contexts[0];
     // Get excerpt from front matter.
-    const excerpt = scope.contexts[0].excerpt;
+    const excerpt = context.excerpt;
 
     return Promise.resolve(this.render(excerpt));
   }

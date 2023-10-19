@@ -40,6 +40,40 @@ test("SEO renders liquid template", t => {
   });
 });
 
+test("SEO renders liquid template when scope is of type Context", t => {
+  t.context.scope = {
+    environments:
+      {
+        page: {
+          url: "/foo"
+        }
+      }
+  };
+  // Mock LiquidEngine.
+  const liquidEngine = {
+    parse(template) {
+      return template;
+    },
+    render(template, contexts) {
+      return new Promise(resolve => {
+        resolve(template);
+      });
+    }
+  };
+
+  const config = new Config({ url: "https://test.com" });
+  const seo = new SEO(config, liquidEngine);
+  const object = seo.getLiquidTag();
+
+  object.parse();
+
+  return object.render(t.context.scope).then(result => {
+    t.truthy(
+      result.includes(`<link rel="canonical" href="{% canonicalURL %}">`)
+    );
+  });
+});
+
 test("SEO renders nunjucks template", t => {
   // Mock nunjucks context
   let contextMock = {

@@ -46,6 +46,22 @@ test("Liquid engine should provide pagination for robots", t => {
   });
 });
 
+test("Liquid engine should provide pagination for robots when scope is of type Context", t => {
+  // Mock liquid engine scope
+  let scope = {
+    environments:
+      {
+        pagination: { pageNumber: 1, size: 2 }
+      }
+  };
+
+  const metaRobots = new MetaRobots();
+
+  return metaRobots.liquidRender(scope).then(result => {
+    t.is(result, "noindex,follow");
+  });
+});
+
 test("Nunjucks engine should provide pagination for robots", t => {
   // Mock nunjucks engine context
   let context = {

@@ -39,6 +39,26 @@ test("liquid: canonical url from page url", t => {
   });
 });
 
+test("liquid: canonical url from page url when scope is of type Context", t => {
+  t.context.scope = {
+    environments: {
+      page: {
+        url: "/foo"
+      }
+    }
+  };
+
+  const config = new Config({ url: "https://test.com" });
+  const canonical = new Canonical(config, null);
+  const object = canonical.getLiquidTag();
+
+  object.parse({ args: "" });
+
+  return object.render(t.context.scope).then(result => {
+    t.is(result, "https://test.com/foo");
+  });
+});
+
 test("nunjucks: canonical url from page url", t => {
   const config = new Config({ url: "https://test.com" });
   const canonical = new Canonical(config);

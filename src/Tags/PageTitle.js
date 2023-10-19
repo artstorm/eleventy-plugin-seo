@@ -29,25 +29,26 @@ class PageTitle extends BaseTag {
   }
 
   liquidRender(scope, hash) {
+    const context = typeof scope.contexts === "undefined" ? scope.environments : scope.contexts[0];
     // Get title from front matter.
     const title =
-      typeof scope.contexts[0].renderData !== "undefined" &&
-      typeof scope.contexts[0].renderData.title !== "undefined"
-        ? scope.contexts[0].renderData.title
-        : scope.contexts[0].title;
+      typeof context.renderData !== "undefined" &&
+      typeof context.renderData.title !== "undefined"
+        ? context.renderData.title
+        : context.title;
 
     // Get page number from pagination.
     const pageNumber = this.keyPathVal(
-      scope.contexts[0],
+      context,
       "pagination.pageNumber",
       0
     );
 
     // Get page size from pagination.
-    const size = this.keyPathVal(scope.contexts[0], "pagination.size", 0);
+    const size = this.keyPathVal(context, "pagination.size", 0);
 
     // Showing page numbers?
-    const showPages = this.showPageNumbers(scope.contexts[0].renderData);
+    const showPages = this.showPageNumbers(context.renderData);
 
     return Promise.resolve(
       showPages

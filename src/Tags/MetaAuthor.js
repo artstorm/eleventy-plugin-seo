@@ -9,8 +9,9 @@ class MetaAuthor extends BaseTag {
   }
 
   liquidRender(scope, hash) {
+    const context = typeof scope.contexts === "undefined" ? scope.environments : scope.contexts[0];
     // Get author from front matter.
-    const author = scope.contexts[0].author;
+    const author = context.author;
 
     return Promise.resolve(this.render(author));
   }

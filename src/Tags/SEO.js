@@ -4,7 +4,8 @@ class SEO extends BaseTag {
   async liquidRender(scope, hash) {
     const template = this.loadTemplate("seo.liquid");
     const parsed = this.engine.parse(template);
-    const rendered = await this.engine.render(parsed, scope.contexts[0]);
+    const context = typeof scope.contexts === "undefined" ? scope.environments : scope.contexts[0];
+    const rendered = await this.engine.render(parsed, context);
 
     return Promise.resolve(rendered);
   }

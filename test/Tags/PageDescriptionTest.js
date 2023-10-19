@@ -52,6 +52,22 @@ test("Liquid engine should provide front matter excerpt", t => {
   });
 });
 
+test("Liquid engine should provide front matter excerpt when scope is of type Context", t => {
+  // Mock liquid engine scope
+  let scope = {
+    environments:
+      {
+        excerpt: "Excerpt in front matter"
+      }
+  };
+
+  const pageDescription = new PageDescription();
+
+  return pageDescription.liquidRender(scope).then(result => {
+    t.is(result, "Excerpt in front matter");
+  });
+});
+
 test("Nunjucks engine should provide front matter excerpt", t => {
   // Mock nunjucks engine context
   let context = {

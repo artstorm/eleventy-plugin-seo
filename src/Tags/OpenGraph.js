@@ -6,24 +6,25 @@ const BaseTag = require("./BaseTag");
  */
 class OpenGraph extends BaseTag {
   async liquidRender(scope, hash) {
+    const context = typeof scope.contexts === "undefined" ? scope.environments : scope.contexts[0];
     // Fallback on using image in config if available and none is set in front matter.
-    const hasConfigImageOnly = !scope.contexts[0].image && this.config.image;
+    const hasConfigImageOnly = !context.image && this.config.image;
 
     const image = hasConfigImageOnly
       ? this.config.image
-      : scope.contexts[0].image;
+      : context.image;
 
     // Add base url from config to front matter image value
     const baseImage = this.config.url + image;
 
     // Default `og:type` to article if none is set
-    const ogtype = !scope.contexts[0].ogtype
+    const ogtype = !context.ogtype
       ? "article"
-      : scope.contexts[0].ogtype;
+      : context.ogtype;
 
     // Define and update a new template context
     const templateContext = {
-      ...scope.contexts[0],
+      ...context,
       ogtype,
       image: this.useImageWithBaseURL(this.config) ? baseImage : image
     };
